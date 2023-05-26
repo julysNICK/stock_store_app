@@ -4,6 +4,7 @@ import 'package:stock_store/widgets/custom_icon_button.dart';
 import '../../constants/constants.dart';
 import '../../data/data.dart';
 import '../../widgets/product_card.dart';
+import '../details/details_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

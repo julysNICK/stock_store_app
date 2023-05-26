@@ -34,7 +34,8 @@ class ProductCard extends StatelessWidget {
                   child: SizedBox(
                     height: 120,
                     width: 140,
-                    child: Image.network(product.image),
+                    child: Hero(
+                        tag: product.id, child: Image.network(product.image)),
                   ),
                 ),
               ],
