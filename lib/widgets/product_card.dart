@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_store/data/data.dart';
 
+import 'custom_buy_button.dart';
 import 'custom_like_button.dart';
 
 class ProductCard extends StatelessWidget {
@@ -66,7 +67,8 @@ class ProductCard extends StatelessWidget {
                     Text(
                       "\$ ${product.price}",
                       style: Theme.of(context).textTheme.headlineMedium,
-                    )
+                    ),
+                    customBuyButton(),
                   ],
                 ),
               ],

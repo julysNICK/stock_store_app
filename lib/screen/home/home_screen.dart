@@ -114,8 +114,25 @@ class _HomeState extends State<Home> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return ProductCard(
-          product: productData[index],
+        return Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => DetailsScreen(
+                              product: productData[index],
+                            ))));
+              },
+              child: ProductCard(
+                product: productData[index],
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+          ],
         );
       },
     );
