@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stock_store/data/data.dart';
 
+import 'custom_like_button.dart';
+
 class ProductCard extends StatelessWidget {
   final ProductDataModel product;
   const ProductCard({super.key, required this.product});
@@ -26,6 +28,7 @@ class ProductCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                customLikeButton(),
                 Center(
                   child: SizedBox(
                     height: 120,
