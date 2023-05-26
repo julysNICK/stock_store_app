@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stock_store/widgets/custom_icon_button.dart';
 
 import '../../constants/constants.dart';
+import '../../data/data.dart';
+import '../../widgets/product_card.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -43,6 +45,15 @@ class _HomeState extends State<Home> {
             20.0,
           ),
         ),
+        child: Text(
+          _tags[index],
+          style: TextStyle(
+            color: _selectedIndex == index ? Colors.grey[400] : Colors.white,
+            fontSize: 16.0,
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+          ),
+        ),
       ),
     );
   }
@@ -70,54 +81,96 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 16.0,
                 ),
+                const BarApp(),
+                const SizedBox(
+                  height: 25,
+                ),
                 Row(
-                  children: [
-                    Expanded(
-                      flex: 5,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(
-                            8.0,
-                          ),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: _tags
+                      .asMap()
+                      .entries
+                      .map(
+                        (MapEntry map) => _buildTags(
+                          map.key,
                         ),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Colors.black,
-                            ),
-                            labelText: 'Search',
-                            contentPadding: EdgeInsets.zero,
-                            filled: true,
-                            fillColor: AppColor.mainColorSecondary,
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10.0,
-                    ),
-                    customIconButton(
-                      backColor: AppColor.mainColorSecondary,
-                      child: const Icon(
-                        Icons.filter_list,
-                        color: Colors.black,
-                      ),
-                      onTap: () {},
-                      radius: const BorderRadius.all(
-                        Radius.circular(
-                          8.0,
-                        ),
-                      ),
-                    )
-                  ],
+                      )
+                      .toList(),
+                ),
+                const SizedBox(
+                  height: 25,
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildProductListView() {
+    return ListView.builder(
+      itemCount: productData.length,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        return ProductCard(
+          product: productData[index],
+        );
+      },
+    );
+  }
+}
+
+class BarApp extends StatelessWidget {
+  const BarApp({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 5,
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(
+                8.0,
+              ),
+            ),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                labelText: 'Search',
+                contentPadding: EdgeInsets.zero,
+                filled: true,
+                fillColor: AppColor.mainColorSecondary,
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 10.0,
+        ),
+        customIconButton(
+          backColor: AppColor.mainColorSecondary,
+          child: const Icon(
+            Icons.filter_list,
+            color: Colors.black,
+          ),
+          onTap: () {},
+          radius: const BorderRadius.all(
+            Radius.circular(
+              8.0,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
