@@ -4,6 +4,7 @@ import 'package:stock_store/data/data.dart';
 import 'package:stock_store/widgets/custom_icon_button.dart';
 
 import '../../widgets/custom_like_button.dart';
+import '../../widgets/cutom_buy_detail_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
   final ProductDataModel product;
@@ -145,7 +146,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   height: 20,
                 ),
                 Text(
-                  "Description",
+                  "Informaçoes do Produto",
                   style: TextStyle(
                     color: Colors.grey[800],
                     fontSize: AppFontSize.fontSizeSubTitle,
@@ -169,7 +170,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   height: 20,
                 ),
                 Text(
-                  "Reviews",
+                  "Fornecedores",
                   style: TextStyle(
                     color: Colors.grey[800],
                     fontSize: AppFontSize.fontSizeSubTitle,
@@ -269,6 +270,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                customBuyDetailScreen()
               ],
             ),
           ),
