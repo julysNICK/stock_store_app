@@ -14,3 +14,21 @@ class AppColor {
   static const Color warningColor = Color(0x00ffc107);
   static const Color errorColor = Color(0x00f44336);
 }
+
+class AppFontSize {
+  static const double fontSizeTitle = 20;
+  static const double fontSizeSubTitle = 16;
+  static const double fontSizeBody = 14;
+  static const double fontSizeCaption = 12;
+}
+
+class AppFontWeight {
+  static const FontWeight fontWeightBold = FontWeight.bold;
+  static const FontWeight fontWeightNormal = FontWeight.normal;
+  static const FontWeight fontWeightLight = FontWeight.w300;
+}
+
+class appFontFamily {
+  static const String fontFamilyDefault = 'Roboto';
+  static const String fontFamilySecondary = 'Roboto';
+}

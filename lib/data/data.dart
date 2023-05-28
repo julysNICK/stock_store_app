@@ -27,7 +27,7 @@ List<ProductDataModel> productData = [
     description:
         "The future of health is on your wrist. Measure your blood oxygen level with a revolutionary new sensor and app. Take an ECG anytime, anywhere. See your fitness metrics at a glance with the enhanced Always-On Retina display. With Apple Watch Series 6 on your wrist, a healthier, more active, more connected life is within reach.",
     price: "\$399",
-    image: "assets/images/apple_watch.png",
+    image: "https://imgs.casasbahia.com.br/1510888877/1xg.jpg?imwidth=500",
     tagLine: "New",
     color: const Color(0xFFEAEAEA),
   ),
@@ -37,7 +37,7 @@ List<ProductDataModel> productData = [
     description:
         "The future of health is on your wrist. Measure your blood oxygen level with a revolutionary new sensor and app. Take an ECG anytime, anywhere. See your fitness metrics at a glance with the enhanced Always-On Retina display. With Apple Watch Series 6 on your wrist, a healthier, more active, more connected life is within reach.",
     price: "\$349",
-    image: "assets/images/apple_watch.png",
+    image: "https://imgs.casasbahia.com.br/1510888877/1xg.jpg?imwidth=500",
     tagLine: "New",
     color: const Color(0xFFEAEAEA),
   ),
@@ -47,7 +47,7 @@ List<ProductDataModel> productData = [
     description:
         "The future of health is on your wrist. Measure your blood oxygen level with a revolutionary new sensor and app. Take an ECG anytime, anywhere. See your fitness metrics at a glance with the enhanced Always-On Retina display. With Apple Watch Series 6 on your wrist, a healthier, more active, more connected life is within reach.",
     price: "\$299",
-    image: "assets/images/apple_watch.png",
+    image: "https://imgs.casasbahia.com.br/1510888877/1xg.jpg?imwidth=500",
     tagLine: "New",
     color: const Color(0xFFEAEAEA),
   ),
@@ -57,7 +57,7 @@ List<ProductDataModel> productData = [
     description:
         "The future of health is on your wrist. Measure your blood oxygen level with a revolutionary new sensor and app. Take an ECG anytime, anywhere. See your fitness metrics at a glance with the enhanced Always-On Retina display. With Apple Watch Series 6 on your wrist, a healthier, more active, more connected life is within reach.",
     price: "\$399",
-    image: "assets/images/samsung_watch.png",
+    image: "https://imgs.casasbahia.com.br/1510888877/1xg.jpg?imwidth=500",
     tagLine: "New",
     color: const Color(0xFFEAEAEA),
   ),

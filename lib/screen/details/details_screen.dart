@@ -94,18 +94,33 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
                 Text(
                   widget.product.name,
-                  style: Theme.of(context).textTheme.displayLarge,
+                  style: TextStyle(
+                    color: Colors.grey[800],
+                    fontSize: AppFontSize.fontSizeTitle * 1.5,
+                    fontWeight: AppFontWeight.fontWeightBold,
+                    fontFamily: appFontFamily.fontFamilyDefault,
+                  ),
                 ),
                 Text(
                   widget.product.tagLine,
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: AppFontSize.fontSizeSubTitle,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: appFontFamily.fontFamilyDefault,
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
                   "Select Size",
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: TextStyle(
+                    color: Colors.grey[800],
+                    fontSize: AppFontSize.fontSizeSubTitle,
+                    fontWeight: AppFontWeight.fontWeightBold,
+                    fontFamily: appFontFamily.fontFamilyDefault,
+                  ),
                 ),
                 SizedBox(
                   height: 50,
@@ -131,21 +146,36 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
                 Text(
                   "Description",
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: TextStyle(
+                    color: Colors.grey[800],
+                    fontSize: AppFontSize.fontSizeSubTitle,
+                    fontWeight: AppFontWeight.fontWeightBold,
+                    fontFamily: appFontFamily.fontFamilyDefault,
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
                   widget.product.description,
-                  style: Theme.of(context).textTheme.displayMedium,
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: AppFontSize.fontSizeSubTitle,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: appFontFamily.fontFamilyDefault,
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 Text(
                   "Reviews",
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: TextStyle(
+                    color: Colors.grey[800],
+                    fontSize: AppFontSize.fontSizeSubTitle,
+                    fontWeight: AppFontWeight.fontWeightBold,
+                    fontFamily: appFontFamily.fontFamilyDefault,
+                  ),
                 ),
                 const SizedBox(
                   height: 15,

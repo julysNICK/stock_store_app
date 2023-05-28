@@ -19,9 +19,9 @@ class _HomeState extends State<Home> {
     "Technology",
     "Health",
     "Finance",
-    "Energy",
-    "Consumer",
-    "Transportation",
+    // "Energy",
+    // "Consumer",
+    // "Transportation",
   ];
 
   int _selectedIndex = 0;
@@ -49,7 +49,8 @@ class _HomeState extends State<Home> {
         child: Text(
           _tags[index],
           style: TextStyle(
-            color: _selectedIndex == index ? Colors.grey[400] : Colors.white,
+            color:
+                _selectedIndex == index ? Colors.grey[800] : Colors.grey[400],
             fontSize: 16.0,
             fontWeight: FontWeight.w600,
             fontFamily: 'Poppins',
@@ -71,14 +72,22 @@ class _HomeState extends State<Home> {
             ),
             child: Column(
               children: [
-                Text(
+                const Text(
                   'Stock Market',
-                  style: Theme.of(context).textTheme.displayLarge,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: AppFontSize.fontSizeTitle,
+                    fontWeight: AppFontWeight.fontWeightBold,
+                    fontFamily: 'Poppins',
+                  ),
                 ),
-                Text(
-                  'Welcome to the Stock Market App',
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
+                Text('Welcome to the Stock Market App',
+                    style: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: AppFontSize.fontSizeBody,
+                      fontWeight: AppFontWeight.fontWeightNormal,
+                      fontFamily: 'Poppins',
+                    )),
                 const SizedBox(
                   height: 16.0,
                 ),
@@ -87,7 +96,7 @@ class _HomeState extends State<Home> {
                   height: 25,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: _tags
                       .asMap()
                       .entries
@@ -101,6 +110,7 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 25,
                 ),
+                _buildProductListView(),
               ],
             ),
           ),

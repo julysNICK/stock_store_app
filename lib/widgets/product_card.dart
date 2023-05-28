@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_store/constants/constants.dart';
 import 'package:stock_store/data/data.dart';
 
 import 'custom_buy_button.dart';
@@ -48,27 +49,45 @@ class ProductCard extends StatelessWidget {
               children: [
                 RichText(
                   text: TextSpan(
+                    spellOut: true,
                     text: product.name,
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: AppFontSize.fontSizeTitle * 1.2,
+                      fontWeight: AppFontWeight.fontWeightBold,
+                      fontFamily: appFontFamily.fontFamilyDefault,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     children: <TextSpan>[
                       TextSpan(
                         text: '\nby nike',
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: AppFontSize.fontSizeBody * 1.2,
+                          fontWeight: AppFontWeight.fontWeightNormal,
+                          fontFamily: appFontFamily.fontFamilyDefault,
+                        ),
                       ),
                     ],
                   ),
                 ),
-                Text(
-                  product.tagLine,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+                Text(product.tagLine,
+                    style: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: AppFontSize.fontSizeBody * 1.2,
+                      fontWeight: AppFontWeight.fontWeightNormal,
+                      fontFamily: appFontFamily.fontFamilyDefault,
+                    )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "\$ ${product.price}",
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
+                    Text("\$ ${product.price}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: AppFontSize.fontSizeTitle * 1.5,
+                          fontWeight: AppFontWeight.fontWeightBold,
+                          fontFamily: appFontFamily.fontFamilyDefault,
+                        )),
                     customBuyButton(),
                   ],
                 ),
