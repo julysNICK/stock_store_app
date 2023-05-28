@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stock_store/constants/constants.dart';
 
-Widget customBuyDetailScreen() {
+Widget customBuyDetailScreen({
+  Function()? onTap,
+}) {
   return InkWell(
-    onTap: () {},
+    onTap: onTap,
     borderRadius: BorderRadius.circular(12),
     child: Container(
       width: double.infinity,

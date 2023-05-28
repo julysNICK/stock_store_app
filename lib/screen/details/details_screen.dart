@@ -5,6 +5,7 @@ import 'package:stock_store/widgets/custom_icon_button.dart';
 
 import '../../widgets/custom_like_button.dart';
 import '../../widgets/cutom_buy_detail_screen.dart';
+import '../../widgets/skeleton_bottom_sheet.dart';
 
 class DetailsScreen extends StatefulWidget {
   final ProductDataModel product;
@@ -273,7 +274,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                customBuyDetailScreen()
+                customBuyDetailScreen(onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) => const SkeletonBottomSheet(),
+                  );
+                })
               ],
             ),
           ),
