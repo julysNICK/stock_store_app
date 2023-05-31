@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_store/screen/details_supplier/detail_supplier_screen.dart';
 
 class moreSupplierScreen extends StatefulWidget {
   const moreSupplierScreen({super.key});
@@ -36,6 +37,14 @@ class _moreSupplierScreenState extends State<moreSupplierScreen> {
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const detailSupllier(),
+                            ),
+                          );
+                        },
                         title: Text('Supplier $index'),
                         subtitle: Text('Supplier $index'),
                         trailing: const Icon(Icons.arrow_forward_ios),
