@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_store/constants/constants.dart';
 import 'package:stock_store/data/data.dart';
+import 'package:stock_store/screen/moreSupplier/more_supplier_screen.dart';
 import 'package:stock_store/widgets/custom_icon_button.dart';
 
 import '../../widgets/custom_like_button.dart';
@@ -170,13 +171,43 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
-                  "Fornecedores",
-                  style: TextStyle(
-                    color: Colors.grey[800],
-                    fontSize: AppFontSize.fontSizeSubTitle,
-                    fontWeight: AppFontWeight.fontWeightBold,
-                    fontFamily: appFontFamily.fontFamilyDefault,
+                InkWell(
+                  onTap: () {
+                    print("Fornecedores");
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const moreSupplierScreen(),
+                      ),
+                    );
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Fornecedores",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: AppFontSize.fontSizeSubTitle,
+                          fontWeight: AppFontWeight.fontWeightBold,
+                          fontFamily: appFontFamily.fontFamilyDefault,
+                        ),
+                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     showModalBottomSheet(
+                      //       context: context,
+                      //       isScrollControlled: true,
+                      //       builder: (context) => const SkeletonBottomSheet(),
+                      //     );
+                      //   },
+                      //   child:
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.grey,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(

@@ -13,7 +13,7 @@ Widget customBuyButton() {
       ),
       child: const Center(
           child: Text(
-        'Buy',
+        'Details',
         style: TextStyle(
           color: Colors.white,
           fontSize: 12,
