@@ -7,6 +7,8 @@ import 'package:stock_store/widgets/custom_icon_button.dart';
 import '../../widgets/custom_like_button.dart';
 import '../../widgets/cutom_buy_detail_screen.dart';
 import '../../widgets/skeleton_bottom_sheet.dart';
+import '../../widgets/skeleton_bottom_sheet_delete..dart';
+import '../../widgets/skeleton_bottom_sheet_edit..dart';
 
 class DetailsScreen extends StatefulWidget {
   final ProductDataModel product;
@@ -309,7 +311,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
-                      builder: (context) => SkeletonBottomSheet(
+                      builder: (context) => SkeletonBottomSheetEdit(
                         title: "Editar Produto no estoque",
                         colorButton: Colors.orange[200]!,
                       ),
@@ -326,7 +328,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
-                      builder: (context) => SkeletonBottomSheet(
+                      builder: (context) => SkeletonBottomSheetDelete(
                         title: "Excluir Produto no estoque",
                         colorButton: Colors.redAccent[200]!,
                       ),
