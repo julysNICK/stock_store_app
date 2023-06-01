@@ -69,12 +69,12 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: ListView(
           children: [
-            const DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.blue[900],
               ),
-              child: Text(
-                'Drawer Header',
+              child: const Text(
+                'Minha loja',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -88,7 +88,7 @@ class _HomeState extends State<Home> {
               },
             ),
             ListTile(
-              title: const Text('Item 2'),
+              title: const Text('Sair'),
               onTap: () {
                 Navigator.pop(context);
               },

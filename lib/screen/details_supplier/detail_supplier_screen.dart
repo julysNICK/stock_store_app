@@ -94,8 +94,13 @@ class _detailSupllierState extends State<detailSupllier> {
                         width: 120,
                         height: 30,
                         decoration: BoxDecoration(
-                          color: Colors.black,
                           borderRadius: BorderRadius.circular(15),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Colors.black,
+                              Colors.grey,
+                            ],
+                          ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -125,8 +130,13 @@ class _detailSupllierState extends State<detailSupllier> {
                         width: 120,
                         height: 30,
                         decoration: BoxDecoration(
-                          color: Colors.black,
                           borderRadius: BorderRadius.circular(15),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Colors.green,
+                              Colors.greenAccent,
+                            ],
+                          ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -156,8 +166,13 @@ class _detailSupllierState extends State<detailSupllier> {
                         width: 120,
                         height: 30,
                         decoration: BoxDecoration(
-                          color: Colors.black,
                           borderRadius: BorderRadius.circular(15),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Colors.purple,
+                              Colors.purpleAccent,
+                            ],
+                          ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
