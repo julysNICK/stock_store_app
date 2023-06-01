@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stock_store/screen/chat_supplier/chat_supplier_screen.dart';
 
 import '../../constants/constants.dart';
 
@@ -17,7 +18,12 @@ class _detailSupllierState extends State<detailSupllier> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            print("object");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const chat_supplier(),
+              ),
+            );
           },
           child: const Icon(Icons.support_agent),
         ),
