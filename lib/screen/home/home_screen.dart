@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_store/widgets/custom_icon_button.dart';
 
@@ -62,7 +63,42 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: scaffoldKey,
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+      drawerDragStartBehavior: DragStartBehavior.down,
+      drawerEnableOpenDragGesture: true,
+      drawerScrimColor: Colors.black.withOpacity(0.5),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -72,14 +108,32 @@ class _HomeState extends State<Home> {
             ),
             child: Column(
               children: [
-                const Text(
-                  'Stock Market',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: AppFontSize.fontSizeTitle,
-                    fontWeight: AppFontWeight.fontWeightBold,
-                    fontFamily: 'Poppins',
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        scaffoldKey.currentState!.openDrawer();
+                      },
+                      child: const Icon(
+                        Icons.menu,
+                        color: Colors.black,
+                        size: 30.0,
+                      ),
+                    ),
+                    const Text(
+                      'Stock Market',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: AppFontSize.fontSizeTitle,
+                        fontWeight: AppFontWeight.fontWeightBold,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 30.0,
+                    ),
+                  ],
                 ),
                 Text('Welcome to the Stock Market App',
                     style: TextStyle(

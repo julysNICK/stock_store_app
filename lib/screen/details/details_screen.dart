@@ -305,12 +305,54 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                customBuyDetailScreen(onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) => const SkeletonBottomSheet(),
-                  );
-                })
+                customBuyDetailScreen(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => SkeletonBottomSheet(
+                        title: "Editar Produto no estoque",
+                        colorButton: Colors.orange[200]!,
+                      ),
+                    );
+                  },
+                  title: "Editar Produto no estoque",
+                  color: Colors.redAccent[100]!,
+                  colorButton: Colors.orange[200]!,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                customBuyDetailScreen(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => SkeletonBottomSheet(
+                        title: "Excluir Produto no estoque",
+                        colorButton: Colors.redAccent[200]!,
+                      ),
+                    );
+                  },
+                  title: "Excluir Produto no estoque",
+                  color: Colors.grey[200]!,
+                  colorButton: Colors.redAccent[100]!,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                customBuyDetailScreen(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => SkeletonBottomSheet(
+                        title: "Comprar Produto no estoque",
+                        colorButton: Colors.green[200]!,
+                      ),
+                    );
+                  },
+                  title: "Comprar Produto no estoque",
+                  color: Colors.grey[200]!,
+                  colorButton: Colors.green[200]!,
+                ),
               ],
             ),
           ),

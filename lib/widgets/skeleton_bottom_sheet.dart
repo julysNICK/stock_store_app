@@ -5,7 +5,10 @@ import 'package:stock_store/widgets/dropdown_screen.dart';
 import 'cutom_buy_detail_screen.dart';
 
 class SkeletonBottomSheet extends StatefulWidget {
-  const SkeletonBottomSheet({super.key});
+  String title;
+  Color colorButton;
+  SkeletonBottomSheet(
+      {super.key, required this.title, required this.colorButton});
 
   @override
   State<SkeletonBottomSheet> createState() => _SkeletonBottomSheetState();
@@ -152,7 +155,12 @@ class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
                 const SizedBox(
                   height: 10,
                 ),
-                customBuyDetailScreen(onTap: () {})
+                customBuyDetailScreen(
+                  onTap: () {},
+                  title: widget.title,
+                  color: Colors.white,
+                  colorButton: widget.colorButton,
+                )
               ],
             ),
           ),
