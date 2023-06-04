@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
-Widget customLikeButton() {
+Widget customLikeButton({
+  required VoidCallback onTap,
+}) {
   return InkWell(
     borderRadius: BorderRadius.circular(
       12.0,
     ),
-    onTap: () {},
+    onTap: () {
+      onTap();
+    },
     child: Container(
       width: 30,
       height: 30,

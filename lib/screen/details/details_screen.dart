@@ -91,7 +91,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         onPressed: () {
                           Navigator.pop(context);
                         }),
-                    Positioned(right: 10, top: 10, child: customLikeButton())
+                    Positioned(
+                        right: 10,
+                        top: 10,
+                        child: customLikeButton(
+                          onTap: () {},
+                        ))
                   ],
                 ),
                 const SizedBox(

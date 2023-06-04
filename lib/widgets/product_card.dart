@@ -5,10 +5,16 @@ import 'package:stock_store/data/data.dart';
 import 'custom_buy_button.dart';
 import 'custom_like_button.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final ProductDataModel product;
-  const ProductCard({super.key, required this.product});
+  bool isLiked;
+  ProductCard({super.key, required this.product, required this.isLiked});
 
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +23,7 @@ class ProductCard extends StatelessWidget {
         vertical: 10.0,
       ),
       decoration: BoxDecoration(
-        color: product.color,
+        color: widget.product.color,
         borderRadius: BorderRadius.circular(
           20.0,
         ),
@@ -30,13 +36,19 @@ class ProductCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                customLikeButton(),
+                customLikeButton(onTap: () {
+                  print('Like button tapped');
+                  setState(() {
+                    widget.isLiked = !widget.isLiked;
+                  });
+                }),
                 Center(
                   child: SizedBox(
                     height: 120,
                     width: 140,
                     child: Hero(
-                        tag: product.id, child: Image.network(product.image)),
+                        tag: widget.product.id,
+                        child: Image.network(widget.product.image)),
                   ),
                 ),
               ],
@@ -50,7 +62,7 @@ class ProductCard extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                     spellOut: true,
-                    text: product.name,
+                    text: widget.product.name,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: AppFontSize.fontSizeTitle * 1.2,
@@ -71,7 +83,7 @@ class ProductCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text(product.tagLine,
+                Text(widget.product.tagLine,
                     style: TextStyle(
                       color: Colors.grey[400],
                       fontSize: AppFontSize.fontSizeBody * 1.2,
@@ -81,7 +93,7 @@ class ProductCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("\$ ${product.price}",
+                    Text("\$ ${widget.product.price}",
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: AppFontSize.fontSizeTitle * 1.5,

@@ -192,6 +192,7 @@ class _HomeState extends State<Home> {
               },
               child: ProductCard(
                 product: productData[index],
+                isLiked: false,
               ),
             ),
             const SizedBox(
