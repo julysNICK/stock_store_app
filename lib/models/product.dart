@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ffi';
 
 class Product {
@@ -11,7 +10,7 @@ class Product {
   Int32 quantity;
   Int64 storeId;
   Int64 supplierId;
-  Timer createdAt;
+  DateTime createdAt;
 
   Product({
     required this.id,
