@@ -1,16 +1,14 @@
-import 'dart:ffi';
-
 class Product {
-  Int64 id;
+  int id;
   String name;
   String category;
   String imageUrl;
   String description;
   String price;
-  Int32 quantity;
-  Int64 storeId;
-  Int64 supplierId;
-  DateTime createdAt;
+  int quantity;
+  int storeId;
+  int supplierId;
+  String createdAt;
 
   Product({
     required this.id,
@@ -33,8 +31,8 @@ class Product {
         description: json["description"],
         price: json["price"],
         quantity: json["quantity"],
-        storeId: json["storeId"],
-        supplierId: json["supplierId"],
+        storeId: json["storeID"],
+        supplierId: json["supplierID"],
         createdAt: json["createdAt"],
       );
 }

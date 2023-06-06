@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_store/constants/constants.dart';
-import 'package:stock_store/data/data.dart';
+import 'package:stock_store/models/product.dart';
 import 'package:stock_store/screen/moreSupplier/more_supplier_screen.dart';
 import 'package:stock_store/widgets/custom_icon_button.dart';
 
@@ -11,7 +11,7 @@ import '../../widgets/skeleton_bottom_sheet_delete..dart';
 import '../../widgets/skeleton_bottom_sheet_edit..dart';
 
 class DetailsScreen extends StatefulWidget {
-  final ProductDataModel product;
+  final Product product;
   const DetailsScreen({super.key, required this.product});
 
   @override
@@ -77,14 +77,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       width: double.infinity,
                       height: 300,
                       decoration: BoxDecoration(
-                        color: widget.product.color,
+                        color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(
                           20.0,
                         ),
                       ),
                       child: Hero(
                           tag: widget.product.id,
-                          child: Image.network(widget.product.image)),
+                          child: Image.network(widget.product.imageUrl)),
                     ),
                     IconButton(
                         icon: const Icon(Icons.arrow_back_ios),
@@ -112,7 +112,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                 ),
                 Text(
-                  widget.product.tagLine,
+                  widget.product.category,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: AppFontSize.fontSizeSubTitle,

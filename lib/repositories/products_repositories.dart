@@ -15,9 +15,9 @@ class ProductRepositories {
     return error;
   }
 
-  Future<Product> getProduct(int id) async {
+  Future<Product> getProduct(String id) async {
     try {
-      var baseUrl = 'http://localhost:3000';
+      var baseUrl = 'http://192.168.0.69:8080';
       final response = await http.get(Uri.parse('$baseUrl/products/$id'));
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
@@ -26,32 +26,43 @@ class ProductRepositories {
         return throw Exception('Failed to load product');
       }
     } catch (e) {
+      print(e);
       return throw Exception('Failed to load product');
     }
   }
 
   Future<List<Product>> getProducts() async {
     try {
-      var baseUrl = 'http://localhost:3000';
-      final response = await http.get(Uri.parse('$baseUrl/products'));
+      var baseUrl = 'http://192.168.0.69:8080';
+
+      final response =
+          await http.get(Uri.parse('$baseUrl/products?page_id=1&limit=10'));
       if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        var jsonResponse = jsonDecode(response.body);
+
         final List<Product> products = [];
-        jsonResponse['data'].forEach((product) {
+        if (jsonResponse.length == 0) {
+          return products;
+        }
+
+        jsonResponse.forEach((product) {
           products.add(Product.fromJson(product));
         });
+
         return products;
       } else {
+        print(response.statusCode);
         return throw Exception('Failed to load products');
       }
     } catch (e) {
+      print(e);
       return throw Exception('Failed to load products');
     }
   }
 
   Future<List<Product>> getProductsByCategory(String category) async {
     try {
-      var baseUrl = 'http://localhost:3000';
+      var baseUrl = 'http://192.168.0.69:8080';
       final response =
           await http.get(Uri.parse('$baseUrl/products?category=$category'));
       if (response.statusCode == 200) {
@@ -73,7 +84,7 @@ class ProductRepositories {
 
   Future<Product> editProduct(Product product) async {
     try {
-      var baseUrl = 'http://localhost:3000';
+      var baseUrl = 'http://192.168.0.69:8080';
       final response = await http.put(
         Uri.parse('$baseUrl/products/${product.id}'),
         headers: <String, String>{
@@ -94,7 +105,7 @@ class ProductRepositories {
 
   Future<Product> deleteProduct(int id) async {
     try {
-      var baseUrl = 'http://localhost:3000';
+      var baseUrl = 'http://192.168.0.69:8080';
       final response = await http.delete(Uri.parse('$baseUrl/products/$id'));
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;

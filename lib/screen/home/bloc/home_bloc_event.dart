@@ -38,6 +38,16 @@ class HomeBlocAdd extends HomeBlocEvent {
   String toString() => 'HomeBlocAdd { product: $product }';
 }
 
+class HomeBlocGetAllProducts extends HomeBlocEvent {
+  HomeBlocGetAllProducts();
+
+  @override
+  List<Object> get props => [];
+
+  @override
+  String toString() => 'HomeBlocGetAllProducts';
+}
+
 class HomeBlocUpdate extends HomeBlocEvent {
   final Product product;
 
@@ -82,14 +92,4 @@ class HomeBlocSearch extends HomeBlocEvent {
 
   @override
   String toString() => 'HomeBlocSearch { query: $query }';
-}
-
-class HomeBlocGetAllProducts extends HomeBlocEvent {
-  HomeBlocGetAllProducts();
-
-  @override
-  List<Object> get props => [];
-
-  @override
-  String toString() => 'HomeBlocGetAllProducts';
 }

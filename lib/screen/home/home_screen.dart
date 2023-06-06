@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_store/widgets/custom_icon_button.dart';
 
 import '../../constants/constants.dart';
-import '../../data/data.dart';
+import '../../models/product.dart';
 import '../../widgets/product_card.dart';
 import '../details/details_screen.dart';
+import 'bloc/home_bloc_bloc.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -24,6 +26,21 @@ class _HomeState extends State<Home> {
     // "Consumer",
     // "Transportation",
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    BlocProvider.of<HomeBlocBloc>(context).add(HomeBlocGetAllProducts());
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    BlocProvider.of<HomeBlocBloc>(context).close();
+  }
 
   int _selectedIndex = 0;
 
@@ -149,22 +166,33 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 25,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: _tags
-                      .asMap()
-                      .entries
-                      .map(
-                        (MapEntry map) => _buildTags(
-                          map.key,
-                        ),
-                      )
-                      .toList(),
+                BlocBuilder<HomeBlocBloc, HomeBlocState>(
+                  builder: (context, state) {
+                    print(state.products.length);
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: _tags
+                          .asMap()
+                          .entries
+                          .map(
+                            (MapEntry map) => _buildTags(
+                              map.key,
+                            ),
+                          )
+                          .toList(),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 25,
                 ),
-                _buildProductListView(),
+                BlocBuilder<HomeBlocBloc, HomeBlocState>(
+                  builder: (context, state) {
+                    return _buildProductListView(
+                      productDataTest: state.products,
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -173,9 +201,11 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildProductListView() {
+  Widget _buildProductListView({
+    List<Product> productDataTest = const [],
+  }) {
     return ListView.builder(
-      itemCount: productData.length,
+      itemCount: productDataTest.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
@@ -187,11 +217,11 @@ class _HomeState extends State<Home> {
                     context,
                     MaterialPageRoute(
                         builder: ((context) => DetailsScreen(
-                              product: productData[index],
+                              product: productDataTest[index],
                             ))));
               },
               child: ProductCard(
-                product: productData[index],
+                product: productDataTest[index],
                 isLiked: false,
               ),
             ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:stock_store/constants/constants.dart';
-import 'package:stock_store/data/data.dart';
+import 'package:stock_store/models/product.dart';
 
 import 'custom_buy_button.dart';
 import 'custom_like_button.dart';
 
 class ProductCard extends StatefulWidget {
-  final ProductDataModel product;
+  final Product product;
   bool isLiked;
   ProductCard({super.key, required this.product, required this.isLiked});
 
@@ -23,7 +23,7 @@ class _ProductCardState extends State<ProductCard> {
         vertical: 10.0,
       ),
       decoration: BoxDecoration(
-        color: widget.product.color,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(
           20.0,
         ),
@@ -48,7 +48,7 @@ class _ProductCardState extends State<ProductCard> {
                     width: 140,
                     child: Hero(
                         tag: widget.product.id,
-                        child: Image.network(widget.product.image)),
+                        child: Image.network(widget.product.imageUrl)),
                   ),
                 ),
               ],
@@ -83,7 +83,7 @@ class _ProductCardState extends State<ProductCard> {
                     ],
                   ),
                 ),
-                Text(widget.product.tagLine,
+                Text(widget.product.category,
                     style: TextStyle(
                       color: Colors.grey[400],
                       fontSize: AppFontSize.fontSizeBody * 1.2,
