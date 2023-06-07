@@ -1,13 +1,14 @@
 class Product {
   int id;
+  int quantity;
+  int storeId;
+  int supplierId;
+
   String name;
   String category;
   String imageUrl;
   String description;
   String price;
-  int quantity;
-  int storeId;
-  int supplierId;
   String createdAt;
 
   Product({
@@ -24,15 +25,15 @@ class Product {
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-        id: json["id"],
-        name: json["name"],
-        category: json["category"],
-        imageUrl: json["imageUrl"],
-        description: json["description"],
-        price: json["price"],
-        quantity: json["quantity"],
-        storeId: json["storeID"],
-        supplierId: json["supplierID"],
-        createdAt: json["createdAt"],
+        id: json["id"] ?? 0,
+        name: json["name"] ?? '',
+        category: json["category"] ?? '',
+        imageUrl: json["imageUrl"] ?? '',
+        description: json["description"] ?? '',
+        price: json["price"] ?? '',
+        quantity: json["quantity"] ?? 0,
+        storeId: json["storeID"] ?? 0,
+        supplierId: json["supplierID"] ?? 0,
+        createdAt: json["createdAt"] ?? '',
       );
 }

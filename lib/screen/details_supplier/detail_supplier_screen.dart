@@ -15,19 +15,20 @@ class _detailSupllierState extends State<detailSupllier> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const chat_supplier(),
-              ),
-            );
-          },
-          child: const Icon(Icons.support_agent),
-        ),
-        body: SafeArea(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const chat_supplier(),
+            ),
+          );
+        },
+        child: const Icon(Icons.support_agent),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -219,9 +220,99 @@ class _detailSupllierState extends State<detailSupllier> {
                     fontFamily: appFontFamily.fontFamilyDefault,
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Produtos do fornecedor",
+                          style: TextStyle(
+                            color: Colors.grey[800],
+                            fontSize: AppFontSize.fontSizeSubTitle,
+                            fontWeight: AppFontWeight.fontWeightBold,
+                            fontFamily: appFontFamily.fontFamilyDefault,
+                          )),
+                      const Icon(Icons.arrow_forward_ios),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                const card_product()
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
+  }
+}
+
+class card_product extends StatelessWidget {
+  const card_product({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.35,
+      width: MediaQuery.of(context).size.width,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: 10,
+        itemExtent: 100,
+        itemBuilder: (ctx, index) {
+          return GestureDetector(
+            onTap: () {
+              print('Card $index');
+            },
+            child: Container(
+              margin: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRssuRjUDGWeOOjOP4ou0CDiSjYiFycJO6lfg",
+                      width: 150,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  const Text(
+                    'Celular',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Text(
+                    'R\$ 1.000,00',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

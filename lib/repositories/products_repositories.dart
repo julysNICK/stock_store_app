@@ -20,8 +20,9 @@ class ProductRepositories {
       var baseUrl = 'http://192.168.0.69:8080';
       final response = await http.get(Uri.parse('$baseUrl/products/$id'));
       if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-        return Product.fromJson(jsonResponse['data']);
+        var jsonResponse = jsonDecode(response.body);
+
+        return Product.fromJson(jsonResponse["product"]);
       } else {
         return throw Exception('Failed to load product');
       }

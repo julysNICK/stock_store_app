@@ -18,6 +18,7 @@ class DetailProductBloc extends Bloc<DetailProductEvent, DetailProductState> {
       emit(DetailProductLoading());
       try {
         final product = await ProductService().getProduct(event.id);
+
         if (product != null) {
           emit(DetailProductLoaded(product: product));
         } else {

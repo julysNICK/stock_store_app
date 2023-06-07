@@ -1,10 +1,11 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_store/screen/moreSupplier/more_supplier_screen.dart';
 import 'package:stock_store/widgets/custom_icon_button.dart';
 
 import '../../constants/constants.dart';
 import '../../models/product.dart';
+import '../../widgets/bottomBar.dart';
 import '../../widgets/product_card.dart';
 import '../details/details_screen.dart';
 import 'bloc/home_bloc_bloc.dart';
@@ -83,39 +84,39 @@ class _HomeState extends State<Home> {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: scaffoldKey,
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue[900],
-              ),
-              child: const Text(
-                'Minha loja',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Sair'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
-      drawerDragStartBehavior: DragStartBehavior.down,
-      drawerEnableOpenDragGesture: true,
-      drawerScrimColor: Colors.black.withOpacity(0.5),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     children: [
+      //       DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: Colors.blue[900],
+      //         ),
+      //         child: const Text(
+      //           'Minha loja',
+      //           style: TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 24,
+      //           ),
+      //         ),
+      //       ),
+      //       ListTile(
+      //         title: const Text('Item 1'),
+      //         onTap: () {
+      //           Navigator.pop(context);
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('Sair'),
+      //         onTap: () {
+      //           Navigator.pop(context);
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      // drawerDragStartBehavior: DragStartBehavior.down,
+      // drawerEnableOpenDragGesture: true,
+      // drawerScrimColor: Colors.black.withOpacity(0.5),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -168,7 +169,6 @@ class _HomeState extends State<Home> {
                 ),
                 BlocBuilder<HomeBlocBloc, HomeBlocState>(
                   builder: (context, state) {
-                    print(state.products.length);
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: _tags
@@ -198,6 +198,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+      bottomNavigationBar: const bottomBar(),
     );
   }
 
@@ -214,11 +215,13 @@ class _HomeState extends State<Home> {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) => DetailsScreen(
-                              product: productDataTest[index],
-                            ))));
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) => DetailsScreen(
+                          product: productDataTest[index],
+                        )),
+                  ),
+                );
               },
               child: ProductCard(
                 product: productDataTest[index],

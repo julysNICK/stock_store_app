@@ -1,7 +1,25 @@
 part of 'detail_product_bloc.dart';
 
 @immutable
-abstract class DetailProductState {}
+abstract class DetailProductState {
+  Product? product = Product(
+    id: 0,
+    name: '',
+    description: '',
+    price: "",
+    imageUrl: '',
+    category: '',
+    createdAt: "",
+    storeId: 0,
+    quantity: 0,
+    supplierId: 0,
+  );
+
+  DetailProductState({this.product});
+
+  @override
+  List<Object> get props => [];
+}
 
 class DetailProductInitial extends DetailProductState {
   DetailProductInitial();
@@ -18,9 +36,10 @@ class DetailProductLoading extends DetailProductState {
 }
 
 class DetailProductLoaded extends DetailProductState {
+  @override
   final Product product;
 
-  DetailProductLoaded({required this.product});
+  DetailProductLoaded({required this.product}) : super(product: product);
 
   @override
   String toString() => 'DetailProductLoaded';
