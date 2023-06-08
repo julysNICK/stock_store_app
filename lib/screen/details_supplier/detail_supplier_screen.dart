@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stock_store/screen/chat_supplier/chat_supplier_screen.dart';
+import 'package:stock_store/screen/details_supplier/widgets/list_products/list_products.dart';
 
 import '../../constants/constants.dart';
 
@@ -242,76 +243,11 @@ class _detailSupllierState extends State<detailSupllier> {
                 const SizedBox(
                   height: 5,
                 ),
-                const card_product()
+                const list_products()
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class card_product extends StatelessWidget {
-  const card_product({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.35,
-      width: MediaQuery.of(context).size.width,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemCount: 10,
-        itemExtent: 100,
-        itemBuilder: (ctx, index) {
-          return GestureDetector(
-            onTap: () {
-              print('Card $index');
-            },
-            child: Container(
-              margin: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-              ),
-              child: Column(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRssuRjUDGWeOOjOP4ou0CDiSjYiFycJO6lfg",
-                      width: 150,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  const Text(
-                    'Celular',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    'R\$ 1.000,00',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
       ),
     );
   }

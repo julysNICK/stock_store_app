@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_store/screen/details/bloc/detail_product_bloc.dart';
 import 'package:stock_store/screen/home/bloc/home_bloc_bloc.dart';
 import 'package:stock_store/screen/home/home_screen.dart';
+import 'package:stock_store/screen/moreSupplier/bloc/supplier_bloc.dart';
 import 'package:stock_store/screen/moreSupplier/more_supplier_screen.dart';
 
 void main() async {
@@ -15,6 +16,9 @@ void main() async {
         ),
         BlocProvider<DetailProductBloc>(
           create: (context) => DetailProductBloc(),
+        ),
+        BlocProvider<SupplierBloc>(
+          create: (context) => SupplierBloc(),
         ),
       ],
       child: const MyApp(),
