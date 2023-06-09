@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../../models/product.dart';
+
 class card_product_item extends StatelessWidget {
-  const card_product_item({
+  Product product;
+  card_product_item({
     super.key,
+    required this.product,
   });
 
   @override
@@ -22,7 +26,7 @@ class card_product_item extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.network(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRssuRjUDGWeOOjOP4ou0CDiSjYiFycJO6lfg",
+                product.imageUrl,
                 width: 150,
                 height: 150,
                 fit: BoxFit.cover,
@@ -31,17 +35,17 @@ class card_product_item extends StatelessWidget {
             const SizedBox(
               height: 2,
             ),
-            const Text(
-              'Celular',
-              style: TextStyle(
+            Text(
+              product.name,
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Text(
-              'R\$ 1.000,00',
-              style: TextStyle(
+            Text(
+              'R\$ ${product.price}',
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 15,
               ),

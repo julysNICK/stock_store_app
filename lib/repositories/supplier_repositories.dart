@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:stock_store/models/product.dart';
+
 import '../models/supplier.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,7 +22,8 @@ class SupplierRepositories {
   Future<List<Supplier>> getSuppliers() async {
     try {
       var baseUrl = 'http://192.168.0.69:8080';
-      final response = await http.get(Uri.parse('$baseUrl/suppliers'));
+      final response =
+          await http.get(Uri.parse('$baseUrl/suppliers?page_id=1&limit=10'));
 
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
@@ -36,10 +39,10 @@ class SupplierRepositories {
 
         return suppliers;
       } else {
-        return throw Exception('Failed to load suppliers');
+        return throw Exception('Failed to load suppliers $response');
       }
     } catch (e) {
-      return throw Exception('Failed to load suppliers');
+      return throw Exception('Failed to load suppliers $e');
     }
   }
 
@@ -51,12 +54,41 @@ class SupplierRepositories {
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
 
-        return Supplier.fromJson(jsonResponse["supplier"]);
+        return Supplier.fromJson(jsonResponse);
       } else {
         return throw Exception('Failed to load suppliers');
       }
     } catch (e) {
-      return throw Exception('Failed to load suppliers');
+      return throw Exception('Failed to load suppliers $e');
+    }
+  }
+
+  Future<List<Product>> getProductBySupplierId(String id) async {
+    try {
+      var baseUrl = 'http://192.168.0.69:8080';
+
+      final response = await http
+          .get(Uri.parse('$baseUrl/products/supplier/$id?page_id=1&limit=10'));
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body);
+
+        final List<Product> products = [];
+        if (jsonResponse.length == 0) {
+          return products;
+        }
+
+        jsonResponse.forEach((product) {
+          products.add(Product.fromJson(product));
+        });
+
+        return products;
+      } else {
+        print(response.statusCode);
+        return throw Exception('Failed to load products');
+      }
+    } catch (e) {
+      print(e);
+      return throw Exception('Failed to load products');
     }
   }
 }

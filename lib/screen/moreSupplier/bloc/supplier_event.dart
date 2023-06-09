@@ -38,6 +38,30 @@ class SupplierAdd extends SupplierEvent {
   String toString() => 'SupplierAdd { supplier: $supplier }';
 }
 
+class SupplierGetSupplierById extends SupplierEvent {
+  final String id;
+
+  SupplierGetSupplierById({required this.id});
+
+  @override
+  List<Object> get props => [id];
+
+  @override
+  String toString() => 'SupplierGetSupplierById { id: $id }';
+}
+
+class GetByProductsBySupplierId extends SupplierEvent {
+  final String id;
+
+  GetByProductsBySupplierId({required this.id});
+
+  @override
+  List<Object> get props => [id];
+
+  @override
+  String toString() => 'GetByProductsBySupplierId { id: $id }';
+}
+
 class SupplierGetAllSuppliers extends SupplierEvent {
   SupplierGetAllSuppliers();
 

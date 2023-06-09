@@ -1,18 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stock_store/screen/chat_supplier/chat_supplier_screen.dart';
 import 'package:stock_store/screen/details_supplier/widgets/list_products/list_products.dart';
 
 import '../../constants/constants.dart';
+import '../home/bloc/home_bloc_bloc.dart';
+import '../moreSupplier/bloc/supplier_bloc.dart';
 
 class detailSupllier extends StatefulWidget {
-  const detailSupllier({super.key});
+  int id;
+  detailSupllier({
+    super.key,
+    required this.id,
+  });
 
   @override
   State<detailSupllier> createState() => _detailSupllierState();
 }
 
 class _detailSupllierState extends State<detailSupllier> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<SupplierBloc>(context).add(SupplierGetSupplierById(
+      id: widget.id.toString(),
+    ));
+    BlocProvider.of<HomeBlocBloc>(context).add(HomeBlocGetProductBySupplierId(
+      id: widget.id.toString(),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -243,7 +262,13 @@ class _detailSupllierState extends State<detailSupllier> {
                 const SizedBox(
                   height: 5,
                 ),
-                const list_products()
+                BlocBuilder<HomeBlocBloc, HomeBlocState>(
+                  builder: (context, state) {
+                    return list_products(
+                      products: state.products,
+                    );
+                  },
+                )
               ],
             ),
           ),

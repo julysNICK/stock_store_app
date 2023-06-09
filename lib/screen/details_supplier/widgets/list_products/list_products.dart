@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:stock_store/models/product.dart';
 
 import '../card_product_item/card_product_item.dart';
 
 class list_products extends StatelessWidget {
-  const list_products({
+  List<Product> products = [];
+  list_products({
     super.key,
+    required this.products,
   });
 
   @override
@@ -15,10 +18,12 @@ class list_products extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: 10,
+        itemCount: products.length,
         itemExtent: 100,
         itemBuilder: (ctx, index) {
-          return const card_product_item();
+          return card_product_item(
+            product: products[index],
+          );
         },
       ),
     );

@@ -93,3 +93,15 @@ class HomeBlocSearch extends HomeBlocEvent {
   @override
   String toString() => 'HomeBlocSearch { query: $query }';
 }
+
+class HomeBlocGetProductBySupplierId extends HomeBlocEvent {
+  final String id;
+
+  HomeBlocGetProductBySupplierId({required this.id});
+
+  @override
+  List<Object> get props => [id];
+
+  @override
+  String toString() => 'HomeBlocGetProductById { id: $id }';
+}

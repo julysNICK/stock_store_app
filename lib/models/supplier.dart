@@ -1,13 +1,11 @@
-import 'dart:ffi';
-
 class Supplier {
-  Int64 id;
+  int id;
   String name;
   String address;
   String email;
   String contactPhone;
   //created_at
-  DateTime createdAt;
+  String createdAt;
 
   Supplier({
     required this.id,

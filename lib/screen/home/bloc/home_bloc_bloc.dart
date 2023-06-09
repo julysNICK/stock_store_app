@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:stock_store/models/product.dart';
 import 'package:stock_store/service/product_service.dart';
+import 'package:stock_store/service/supplier_service.dart';
 
 part 'home_bloc_event.dart';
 part 'home_bloc_state.dart';
@@ -16,6 +17,23 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       emit(HomeBlocLoading());
       try {
         final productAll = await ProductService().getProducts();
+        emit(HomeBlocLoaded(
+          products: productAll,
+        ));
+        // emit(HomeBlocInitial());
+      } catch (e) {
+        print(e);
+        emit(HomeBlocError());
+      }
+    });
+    on<HomeBlocGetProductBySupplierId>((event, emit) async {
+      print('HomeBlocGetProductBySupplierId');
+      emit(HomeBlocLoading());
+      try {
+        final productAll = await SupplierService().getProductBySupplierId(
+          event.id,
+        );
+        print(productAll);
         emit(HomeBlocLoaded(
           products: productAll,
         ));

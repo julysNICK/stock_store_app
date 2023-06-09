@@ -51,3 +51,14 @@ class HomeBlocError extends HomeBlocState {
   @override
   String toString() => 'HomeBlocError';
 }
+
+class HomeBlocLoadedBySupplierId extends HomeBlocState {
+  HomeBlocLoadedBySupplierId({required List<Product> products})
+      : super(products: products);
+
+  @override
+  List<Object> get props => [products];
+
+  @override
+  String toString() => 'HomeBlocLoaded';
+}

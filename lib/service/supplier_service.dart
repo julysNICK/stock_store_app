@@ -1,3 +1,5 @@
+import 'package:stock_store/models/product.dart';
+
 import '../models/supplier.dart';
 import '../repositories/supplier_repositories.dart';
 
@@ -15,7 +17,7 @@ class SupplierService {
       final suppliers = await SupplierRepositories().getSuppliers();
       return suppliers;
     } catch (e) {
-      return throw Exception('Failed to load suppliers');
+      return throw Exception('Failed to load suppliers $e');
     }
   }
 
@@ -24,7 +26,16 @@ class SupplierService {
       final supplier = await SupplierRepositories().getSupplier(id);
       return supplier;
     } catch (e) {
-      return throw Exception('Failed to load supplier');
+      return throw Exception('Failed to load supplier $e');
+    }
+  }
+
+  Future<List<Product>> getProductBySupplierId(String id) async {
+    try {
+      final products = await SupplierRepositories().getProductBySupplierId(id);
+      return products;
+    } catch (e) {
+      return throw Exception('Failed to load products $e');
     }
   }
 }

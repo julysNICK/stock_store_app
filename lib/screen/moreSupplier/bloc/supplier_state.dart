@@ -52,3 +52,14 @@ class SupplierError extends SupplierState {
   @override
   String toString() => 'SupplierError';
 }
+
+class supplierLoadedProductBySupplierId extends SupplierState {
+  supplierLoadedProductBySupplierId({required List<Supplier> suppliers})
+      : super(suppliers: suppliers);
+
+  @override
+  List<Object> get props => [suppliers];
+
+  @override
+  String toString() => 'supplierLoadedProductBySupplierId';
+}

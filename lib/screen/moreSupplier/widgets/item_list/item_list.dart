@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:stock_store/models/supplier.dart';
 
 import '../../../details_supplier/detail_supplier_screen.dart';
 
 class item_list extends StatelessWidget {
-  const item_list({
+  Supplier supplier;
+  item_list({
     super.key,
+    required this.supplier,
   });
 
   @override
@@ -15,12 +18,12 @@ class item_list extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const detailSupllier(),
+              builder: (context) => detailSupllier(id: supplier.id),
             ),
           );
         },
-        title: const Text('Supplier'),
-        subtitle: const Text('Supplier'),
+        title: Text(supplier.name),
+        subtitle: Text("${supplier.id}"),
         trailing: const Icon(Icons.arrow_forward_ios),
       ),
     );
