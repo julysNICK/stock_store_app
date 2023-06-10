@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_store/screen/details/bloc/detail_product_bloc.dart';
+import 'package:stock_store/screen/details_supplier/bloc/detail_supplier_bloc.dart';
 import 'package:stock_store/screen/home/bloc/home_bloc_bloc.dart';
 import 'package:stock_store/screen/home/home_screen.dart';
 import 'package:stock_store/screen/moreSupplier/bloc/supplier_bloc.dart';
@@ -19,6 +20,9 @@ void main() async {
         ),
         BlocProvider<SupplierBloc>(
           create: (context) => SupplierBloc(),
+        ),
+        BlocProvider<DetailSuppBloc>(
+          create: (context) => DetailSuppBloc(),
         ),
       ],
       child: const MyApp(),

@@ -33,7 +33,7 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         final productAll = await SupplierService().getProductBySupplierId(
           event.id,
         );
-        print(productAll);
+
         emit(HomeBlocLoaded(
           products: productAll,
         ));

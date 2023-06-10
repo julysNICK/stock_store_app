@@ -15,10 +15,16 @@ class moreSupplierScreen extends StatefulWidget {
 class _moreSupplierScreenState extends State<moreSupplierScreen> {
   @override
   void initState() {
-    print('initState');
     // TODO: implement initState
     super.initState();
     BlocProvider.of<SupplierBloc>(context).add(SupplierGetAllSuppliers());
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    BlocProvider.of<SupplierBloc>(context).close();
   }
 
   @override

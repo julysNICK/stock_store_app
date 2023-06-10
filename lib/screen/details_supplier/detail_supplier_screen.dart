@@ -7,6 +7,7 @@ import 'package:stock_store/screen/details_supplier/widgets/list_products/list_p
 import '../../constants/constants.dart';
 import '../home/bloc/home_bloc_bloc.dart';
 import '../moreSupplier/bloc/supplier_bloc.dart';
+import 'bloc/detail_supplier_bloc.dart';
 
 class detailSupllier extends StatefulWidget {
   int id;
@@ -24,7 +25,7 @@ class _detailSupllierState extends State<detailSupllier> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<SupplierBloc>(context).add(SupplierGetSupplierById(
+    BlocProvider.of<DetailSuppBloc>(context).add(DetailSupplierLoad(
       id: widget.id.toString(),
     ));
     BlocProvider.of<HomeBlocBloc>(context).add(HomeBlocGetProductBySupplierId(
@@ -70,19 +71,23 @@ class _detailSupllierState extends State<detailSupllier> {
                     //     const SizedBox(width: 30),
                     //   ],
                     // ),
-                    Container(
-                      width: double.infinity,
-                      height: 300,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(
-                          20.0,
-                        ),
-                      ),
-                      child: Image.network(
-                        "https://d2nytdlptrqhdi.cloudfront.net/wp-content/uploads/2017/11/Selos-Fornecedores-2018-01-Cor-e1511947901805.png",
-                        fit: BoxFit.contain,
-                      ),
+                    BlocBuilder<DetailSuppBloc, DetailSupplierState>(
+                      builder: (context, state) {
+                        return Container(
+                          width: double.infinity,
+                          height: 300,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(
+                              20.0,
+                            ),
+                          ),
+                          child: Image.network(
+                            "https://d2nytdlptrqhdi.cloudfront.net/wp-content/uploads/2017/11/Selos-Fornecedores-2018-01-Cor-e1511947901805.png",
+                            fit: BoxFit.contain,
+                          ),
+                        );
+                      },
                     ),
                     IconButton(
                         icon: const Icon(Icons.arrow_back_ios),
@@ -93,9 +98,14 @@ class _detailSupllierState extends State<detailSupllier> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'Nama Supplier',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                BlocBuilder<DetailSuppBloc, DetailSupplierState>(
+                  builder: (context, state) {
+                    return Text(
+                      state.supplier?.name ?? "Carregando...",
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    );
+                  },
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -231,14 +241,18 @@ class _detailSupllierState extends State<detailSupllier> {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: AppFontSize.fontSizeSubTitle,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: appFontFamily.fontFamilyDefault,
-                  ),
+                BlocBuilder<SupplierBloc, SupplierState>(
+                  builder: (context, state) {
+                    return Text(
+                      state.suppliers[0].address,
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: AppFontSize.fontSizeSubTitle,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: appFontFamily.fontFamilyDefault,
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 20,

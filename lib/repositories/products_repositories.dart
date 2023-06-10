@@ -52,7 +52,6 @@ class ProductRepositories {
 
         return products;
       } else {
-        print(response.statusCode);
         return throw Exception('Failed to load products');
       }
     } catch (e) {

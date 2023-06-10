@@ -12,20 +12,28 @@ class list_products extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = products.isNotEmpty
+        ? MediaQuery.of(context).size.width * 0.35
+        : MediaQuery.of(context).size.width * 0.1;
+
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.35,
+      height: width,
       width: MediaQuery.of(context).size.width,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemCount: products.length,
-        itemExtent: 100,
-        itemBuilder: (ctx, index) {
-          return card_product_item(
-            product: products[index],
-          );
-        },
-      ),
+      child: products.isNotEmpty
+          ? ListView.builder(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              itemCount: products.length,
+              itemExtent: 100,
+              itemBuilder: (ctx, index) {
+                return card_product_item(
+                  product: products[index],
+                );
+              },
+            )
+          : const Center(
+              child: Text('No hay productos'),
+            ),
     );
   }
 }

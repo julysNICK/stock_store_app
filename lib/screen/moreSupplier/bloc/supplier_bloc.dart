@@ -16,7 +16,7 @@ class SupplierBloc extends Bloc<SupplierEvent, SupplierState> {
       emit(SupplierLoading());
       try {
         final supplierAll = await SupplierService().getSuppliers();
-        print(supplierAll);
+
         emit(SupplierLoaded(
           suppliers: supplierAll,
         ));
@@ -27,20 +27,20 @@ class SupplierBloc extends Bloc<SupplierEvent, SupplierState> {
       }
     });
 
-    on<SupplierGetSupplierById>((event, emit) async {
-      print('SupplierGetSupplierById');
-      emit(SupplierLoading());
-      try {
-        final supplier = await SupplierService().getSupplier(event.id);
-        print(supplier);
-        emit(SupplierLoaded(
-          suppliers: [supplier],
-        ));
-        // emit(SupplierInitial());
-      } catch (e) {
-        print(e);
-        emit(SupplierError());
-      }
-    });
+    // on<SupplierGetSupplierById>((event, emit) async {
+    //   print('SupplierGetSupplierById');
+    //   emit(SupplierLoading());
+    //   try {
+    //     final supplier = await SupplierService().getSupplier(event.id);
+
+    //     emit(SupplierLoaded(
+    //       suppliers: [supplier],
+    //     ));
+    //     // emit(SupplierInitial());
+    //   } catch (e) {
+    //     print(e);
+    //     emit(SupplierError());
+    //   }
+    // });
   }
 }

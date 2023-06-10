@@ -199,8 +199,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      print("Fornecedores");
-
                       Navigator.push(
                         context,
                         MaterialPageRoute(
