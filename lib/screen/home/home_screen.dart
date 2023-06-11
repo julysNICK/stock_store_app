@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController? tabController;
   final List<String> _tags = [
     "All",
@@ -33,7 +33,22 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
 
-    BlocProvider.of<HomeBlocBloc>(context).add(HomeBlocGetAllProducts());
+    BlocProvider.of<HomeBlocBloc>(context).add(HomeBlocGetAllProducts(
+      category: _tags[0],
+    ));
+
+    tabController = TabController(
+      length: _tags.length,
+      vsync: this,
+    );
+
+    tabController!.addListener(whenTabChange);
+  }
+
+  void whenTabChange() {
+    BlocProvider.of<HomeBlocBloc>(context).add(HomeBlocGetAllProducts(
+      category: _tags[tabController!.index],
+    ));
   }
 
   @override

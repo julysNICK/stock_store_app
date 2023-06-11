@@ -39,7 +39,10 @@ class HomeBlocAdd extends HomeBlocEvent {
 }
 
 class HomeBlocGetAllProducts extends HomeBlocEvent {
-  HomeBlocGetAllProducts();
+  String? category;
+  HomeBlocGetAllProducts({
+    this.category,
+  });
 
   @override
   List<Object> get props => [];

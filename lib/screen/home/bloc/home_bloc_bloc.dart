@@ -14,9 +14,12 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     });
     on<HomeBlocGetAllProducts>((event, emit) async {
       print('HomeBlocGetAllProducts');
+      print(event.category);
       emit(HomeBlocLoading());
       try {
-        final productAll = await ProductService().getProducts();
+        final productAll = await ProductService().getProducts(
+          category: event.category,
+        );
         emit(HomeBlocLoaded(
           products: productAll,
         ));

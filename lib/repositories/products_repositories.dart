@@ -32,12 +32,14 @@ class ProductRepositories {
     }
   }
 
-  Future<List<Product>> getProducts() async {
+  Future<List<Product>> getProducts({String? category}) async {
     try {
       var baseUrl = 'http://192.168.0.69:8080';
+      print(
+          '$baseUrl/products?page_id=1&limit=10&category=${category?.toLowerCase()}');
 
-      final response =
-          await http.get(Uri.parse('$baseUrl/products?page_id=1&limit=10'));
+      final response = await http.get(Uri.parse(
+          '$baseUrl/products?page_id=1&limit=10&category=${category?.toLowerCase()}'));
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
 

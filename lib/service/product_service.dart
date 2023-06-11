@@ -10,9 +10,11 @@ class ProductService {
     return _singleton;
   }
 
-  Future<List<Product>> getProducts() async {
+  Future<List<Product>> getProducts({String? category}) async {
     try {
-      final products = await ProductRepositories().getProducts();
+      final products = await ProductRepositories().getProducts(
+        category: category,
+      );
       return products;
     } catch (e) {
       return throw Exception('Failed to load products');
