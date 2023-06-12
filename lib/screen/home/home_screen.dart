@@ -17,7 +17,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  TextEditingController searchController = TextEditingController();
   TabController? tabController;
+
   final List<String> _tags = [
     "All",
     "Technology",
@@ -27,7 +29,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     // "Consumer",
     // "Transportation",
   ];
-
+  var searchProduct;
   @override
   void initState() {
     // TODO: implement initState
@@ -96,11 +98,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    // final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return DefaultTabController(
       length: _tags.length,
       child: Scaffold(
-        key: scaffoldKey,
         // drawer: Drawer(
         //   child: ListView(
         //     children: [
@@ -144,19 +145,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          scaffoldKey.currentState!.openDrawer();
-                        },
-                        child: const Icon(
-                          Icons.menu,
-                          color: Colors.black,
-                          size: 30.0,
-                        ),
-                      ),
-                      const Text(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
                         'Stock Market',
                         style: TextStyle(
                           color: Colors.black,
@@ -165,18 +156,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           fontFamily: 'Poppins',
                         ),
                       ),
-                      const SizedBox(
-                        width: 30.0,
-                      ),
                     ],
                   ),
-                  Text('Welcome to the Stock Market App',
-                      style: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: AppFontSize.fontSizeBody,
-                        fontWeight: AppFontWeight.fontWeightNormal,
-                        fontFamily: 'Poppins',
-                      )),
+                  Text(
+                    'Welcome to the Stock Market App',
+                    style: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: AppFontSize.fontSizeBody,
+                      fontWeight: AppFontWeight.fontWeightNormal,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
                   const SizedBox(
                     height: 16.0,
                   ),
@@ -308,11 +298,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 }
 
-class BarApp extends StatelessWidget {
+class BarApp extends StatefulWidget {
   const BarApp({
     super.key,
   });
 
+  @override
+  State<BarApp> createState() => _BarAppState();
+}
+
+class _BarAppState extends State<BarApp> {
   @override
   Widget build(BuildContext context) {
     return Row(

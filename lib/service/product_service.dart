@@ -29,4 +29,13 @@ class ProductService {
       return throw Exception('Failed to load product');
     }
   }
+
+  Future<List<Product>> searchProduct(String query) async {
+    try {
+      final products = await ProductRepositories().searchProduct(query);
+      return products;
+    } catch (e) {
+      return throw Exception('Failed to load products');
+    }
+  }
 }

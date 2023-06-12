@@ -46,5 +46,23 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         emit(HomeBlocError());
       }
     });
+
+    on<HomeBlocSearch>((event, emit) async {
+      print('HomeBlocSearch');
+      emit(HomeBlocLoading());
+      try {
+        final productAll = await ProductService().searchProduct(
+          event.query,
+        );
+
+        emit(HomeBlocLoaded(
+          products: productAll,
+        ));
+        // emit(HomeBlocInitial());
+      } catch (e) {
+        print(e);
+        emit(HomeBlocError());
+      }
+    });
   }
 }

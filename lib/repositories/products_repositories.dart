@@ -119,4 +119,25 @@ class ProductRepositories {
       return throw Exception('Failed to delete product');
     }
   }
+
+  Future<List<Product>> searchProduct(String query) async {
+    try {
+      var baseUrl = 'http://192.168.0.69:8080';
+      final response =
+          await http.get(Uri.parse('$baseUrl/products?query=$query'));
+
+      if (response.statusCode == 200) {
+        var jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        final List<Product> products = [];
+        jsonResponse['data'].forEach((product) {
+          products.add(Product.fromJson(product));
+        });
+        return products;
+      } else {
+        return throw Exception('Failed to load products');
+      }
+    } catch (e) {
+      return throw Exception('Failed to load products');
+    }
+  }
 }
