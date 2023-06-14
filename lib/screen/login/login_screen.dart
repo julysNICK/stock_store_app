@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:stock_store/screen/login/widgets/button_login.dart';
+import 'package:stock_store/screen/login/widgets/create_account.dart';
+import 'package:stock_store/screen/login/widgets/forgot_password.dart';
+import 'package:stock_store/screen/login/widgets/form_login.dart';
+import 'package:stock_store/screen/login/widgets/logo.dart';
 
 class login_screen extends StatelessWidget {
   const login_screen({super.key});
@@ -13,7 +18,9 @@ class login_screen extends StatelessWidget {
             children: [
               logo(),
               Padding(
-                padding: const EdgeInsets.only(top: 50),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
                 child: Column(
                   children: [
                     const Text(
@@ -41,7 +48,19 @@ class login_screen extends StatelessWidget {
                         ],
                       ),
                       child: form_login(),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    forgot_password(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    button_login(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    create_account(),
                   ],
                 ),
               ),
@@ -49,66 +68,6 @@ class login_screen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Column form_login() {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          child: const TextField(
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: "Email or Phone number",
-              hintStyle: TextStyle(
-                color: Colors.grey,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(10),
-          child: const TextField(
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: "Password",
-              hintStyle: TextStyle(
-                color: Colors.grey,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  SizedBox logo() {
-    return SizedBox(
-      height: double.infinity,
-      child: Stack(children: [
-        Positioned(
-          child: Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(100),
-              image: const DecorationImage(
-                image: AssetImage('assets/4043715.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-      ]),
     );
   }
 }
