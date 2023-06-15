@@ -7,16 +7,16 @@ abstract class LoginEvent {
 }
 
 class LoginLoad extends LoginEvent {
-  final String username;
+  final String email;
   final String password;
 
-  LoginLoad({required this.username, required this.password});
+  LoginLoad({required this.email, required this.password});
 
   @override
-  List<Object> get props => [username, password];
+  List<Object> get props => [email, password];
 
   @override
-  String toString() => 'LoginLoad { username: $username, password: $password }';
+  String toString() => 'LoginLoad { email: $email, password: $password }';
 }
 
 class LoginRefresh extends LoginEvent {

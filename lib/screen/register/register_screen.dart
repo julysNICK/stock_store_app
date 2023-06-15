@@ -1,10 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_store/screen/register/widgets/button_register.dart';
+import 'package:stock_store/screen/register/widgets/enter_account_register.dart';
+import 'package:stock_store/screen/register/widgets/form_register.dart';
+
+import '../login/widgets/logo.dart';
+import 'bloc/register_bloc.dart';
 
 class Register_screen extends StatelessWidget {
   const Register_screen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController name = TextEditingController();
+    TextEditingController address = TextEditingController();
+    TextEditingController contactEmail = TextEditingController();
+    TextEditingController contactPhone = TextEditingController();
+    TextEditingController password = TextEditingController();
+
+    void onTapRegister() {
+      BlocProvider.of<RegisterBloc>(context).add(
+        RegisterLoad(
+          name: name.text,
+          address: address.text,
+          email: contactEmail.text,
+          phone: contactPhone.text,
+          password: password.text,
+        ),
+      );
+    }
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -42,12 +67,20 @@ class Register_screen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: form_register(),
+                      child: form_register(
+                        name,
+                        address,
+                        contactEmail,
+                        contactPhone,
+                        password,
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    button_register(),
+                    button_register(
+                      onTapRegister,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -59,111 +92,6 @@ class Register_screen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Center enter_account() {
-    return const Center(
-      child: Text(
-        "Make login",
-        style: TextStyle(
-          color: Color.fromRGBO(49, 39, 79, .6),
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-
-  Container button_register() {
-    return Container(
-      height: 50,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 60,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: const Color.fromRGBO(49, 29, 79, 1),
-      ),
-      child: const Center(
-        child: Text(
-          "Register",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Column form_register() {
-    return Column(
-      children: [
-        input_text(),
-        input_text(),
-        input_text(),
-        input_text(),
-        input_text(),
-        input_password(),
-      ],
-    );
-  }
-
-  Container input_text() {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.grey,
-          ),
-        ),
-      ),
-      child: const TextField(
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: "Email or Phone number",
-          hintStyle: TextStyle(
-            color: Colors.grey,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container input_password() {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      child: const TextField(
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: "Password",
-          hintStyle: TextStyle(
-            color: Colors.grey,
-          ),
-        ),
-      ),
-    );
-  }
-
-  SizedBox logo() {
-    return SizedBox(
-      height: 150,
-      child: Stack(children: [
-        Positioned(
-          child: Container(
-            width: 150,
-            height: 150,
-            decoration: const BoxDecoration(
-              color: Colors.blue,
-              image: DecorationImage(
-                image: AssetImage('assets/Checklist.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-      ]),
     );
   }
 }

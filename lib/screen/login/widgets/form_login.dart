@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-Column form_login() {
+import '../../../models/store.dart';
+
+Column form_login(TextEditingController email, TextEditingController password,
+    StoreInputsLogin storeInputsLogin) {
   return Column(
     children: [
       Container(
@@ -12,8 +15,12 @@ Column form_login() {
             ),
           ),
         ),
-        child: const TextField(
-          decoration: InputDecoration(
+        child: TextField(
+          controller: email,
+          onChanged: (value) {
+            storeInputsLogin.email = value;
+          },
+          decoration: const InputDecoration(
             border: InputBorder.none,
             hintText: "Email or Phone number",
             hintStyle: TextStyle(
@@ -24,8 +31,13 @@ Column form_login() {
       ),
       Container(
         padding: const EdgeInsets.all(10),
-        child: const TextField(
-          decoration: InputDecoration(
+        child: TextField(
+          obscureText: true,
+          controller: password,
+          onChanged: (value) {
+            storeInputsLogin.password = value;
+          },
+          decoration: const InputDecoration(
             border: InputBorder.none,
             hintText: "Password",
             hintStyle: TextStyle(

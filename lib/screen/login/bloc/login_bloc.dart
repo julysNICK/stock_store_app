@@ -2,10 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:stock_store/service/store_service.dart';
 
-import '../../../models/store.dart';
+import 'login_state.dart';
 
 part 'login_event.dart';
-part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
@@ -16,11 +15,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginLoad>((event, emit) async {
       print('LoginLoad');
       emit(LoginLoading());
+
       try {
         final login =
-            await StoreService().loginStore(event.username, event.password);
-        print(login);
-        emit(LoginLoaded());
+            await StoreService().loginStore(event.email, event.password);
+        emit(LoginLoaded(
+          login: login,
+        ));
       } catch (e) {
         print(e);
         emit(LoginError());

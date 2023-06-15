@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-InkWell button_login(
+InkWell button_register(
   void Function() onTapRegister,
 ) {
   return InkWell(
@@ -16,7 +16,7 @@ InkWell button_login(
       ),
       child: const Center(
         child: Text(
-          "Login",
+          "Register",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

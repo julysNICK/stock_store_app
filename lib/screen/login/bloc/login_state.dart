@@ -1,12 +1,16 @@
-part of 'login_bloc.dart';
+import '../../../models/store.dart';
 
-@immutable
-abstract class LoginState {}
-
-class LoginInitial extends LoginState {
+abstract class LoginState {
   Login_store? login;
 
-  LoginInitial({this.login});
+  LoginState({this.login});
+}
+
+class LoginInitial extends LoginState {
+  LoginInitial() : super();
+
+  @override
+  String toString() => 'LoginInitial';
 }
 
 class LoginLoading extends LoginState {
@@ -14,7 +18,10 @@ class LoginLoading extends LoginState {
 }
 
 class LoginLoaded extends LoginState {
-  LoginLoaded();
+  LoginLoaded({required Login_store login}) : super(login: login);
+
+  @override
+  String toString() => 'LoginLoaded';
 }
 
 class LoginError extends LoginState {

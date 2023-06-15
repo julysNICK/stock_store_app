@@ -1,12 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_store/screen/login/bloc/login_bloc.dart';
 import 'package:stock_store/screen/login/widgets/button_login.dart';
 import 'package:stock_store/screen/login/widgets/create_account.dart';
 import 'package:stock_store/screen/login/widgets/forgot_password.dart';
 import 'package:stock_store/screen/login/widgets/form_login.dart';
 import 'package:stock_store/screen/login/widgets/logo.dart';
 
-class login_screen extends StatelessWidget {
+import '../../models/store.dart';
+
+class login_screen extends StatefulWidget {
   const login_screen({super.key});
+
+  @override
+  State<login_screen> createState() => _login_screenState();
+}
+
+class _login_screenState extends State<login_screen> {
+  TextEditingController email = TextEditingController();
+
+  TextEditingController password = TextEditingController();
+
+  StoreInputsLogin storeInputsLogin = StoreInputsLogin();
+
+  void onTapStoreInputsLogin() {
+    print("oioi");
+    BlocProvider.of<LoginBloc>(context).add(LoginLoad(
+      email: storeInputsLogin.email,
+      password: storeInputsLogin.password,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +70,11 @@ class login_screen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: form_login(),
+                      child: form_login(
+                        email,
+                        password,
+                        storeInputsLogin,
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -56,7 +83,7 @@ class login_screen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    button_login(),
+                    button_login(onTapStoreInputsLogin),
                     const SizedBox(
                       height: 20,
                     ),

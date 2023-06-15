@@ -24,6 +24,7 @@ class StoreService {
     try {
       final store = await StoreRepositories().createStore(
           name, address, contactEmail, contactPhone, hashedPassword);
+      print(store);
       return store;
     } catch (e) {
       return throw Exception('Failed to create store');

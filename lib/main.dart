@@ -4,8 +4,12 @@ import 'package:stock_store/screen/details/bloc/detail_product_bloc.dart';
 import 'package:stock_store/screen/details_supplier/bloc/detail_supplier_bloc.dart';
 import 'package:stock_store/screen/home/bloc/home_bloc_bloc.dart';
 import 'package:stock_store/screen/home/home_screen.dart';
+import 'package:stock_store/screen/login/bloc/login_bloc.dart';
+import 'package:stock_store/screen/login/login_screen.dart';
 import 'package:stock_store/screen/moreSupplier/bloc/supplier_bloc.dart';
 import 'package:stock_store/screen/moreSupplier/more_supplier_screen.dart';
+import 'package:stock_store/screen/register/bloc/register_bloc.dart';
+import 'package:stock_store/screen/register/register_screen.dart';
 
 void main() async {
   try {
@@ -24,6 +28,14 @@ void main() async {
         BlocProvider<DetailSuppBloc>(
           create: (context) => DetailSuppBloc(),
         ),
+        BlocProvider<LoginBloc>(
+          create: (context) => LoginBloc(),
+          child: const login_screen(),
+        ),
+        BlocProvider<RegisterBloc>(
+          create: (context) => RegisterBloc(),
+          child: const Register_screen(),
+        ),
       ],
       child: const MyApp(),
     ));
@@ -32,9 +44,14 @@ void main() async {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,7 +59,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home: const Register_screen(),
       routes: {
         '/home': (context) => const Home(),
         '/supplier': (context) => const moreSupplierScreen()
