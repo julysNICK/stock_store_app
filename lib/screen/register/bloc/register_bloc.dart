@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 import 'package:stock_store/screen/register/bloc/register_state.dart';
 
 import '../../../service/store_service.dart';

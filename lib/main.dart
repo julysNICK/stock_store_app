@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_store/screen/chat_supplier/bloc/chat_bloc.dart';
+import 'package:stock_store/screen/chat_supplier/chat_supplier_screen.dart';
 import 'package:stock_store/screen/details/bloc/detail_product_bloc.dart';
 import 'package:stock_store/screen/details_supplier/bloc/detail_supplier_bloc.dart';
 import 'package:stock_store/screen/home/bloc/home_bloc_bloc.dart';
@@ -36,6 +38,10 @@ void main() async {
           create: (context) => RegisterBloc(),
           child: const Register_screen(),
         ),
+        BlocProvider<ChatBloc>(
+          create: (context) => ChatBloc(),
+          child: const chat_supplier(),
+        ),
       ],
       child: const MyApp(),
     ));
@@ -59,10 +65,12 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Register_screen(),
+      home: const Home(),
       routes: {
         '/home': (context) => const Home(),
-        '/supplier': (context) => const moreSupplierScreen()
+        '/supplier': (context) => const moreSupplierScreen(),
+        '/login': (context) => const login_screen(),
+        '/register': (context) => const Register_screen(),
       },
     );
   }

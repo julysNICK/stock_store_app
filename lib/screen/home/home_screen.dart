@@ -55,8 +55,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     // TODO: implement dispose
-    super.dispose();
+
+    if (mounted) {
+      tabController!.dispose();
+    }
+
     BlocProvider.of<HomeBlocBloc>(context).close();
+    super.dispose();
   }
 
   int _selectedIndex = 0;
