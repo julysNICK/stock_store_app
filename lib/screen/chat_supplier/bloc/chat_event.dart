@@ -10,34 +10,69 @@ abstract class ChatEvent {
 }
 
 class ChatLoad extends ChatEvent {
-  final String id;
-  final String message;
-  final String sender;
-  final String receiver;
+  List<dynamic> mensagens;
+  String message;
+  String IdSender;
+  String author;
 
-  ChatLoad(
-      {required this.id,
-      required this.message,
-      required this.sender,
-      required this.receiver});
-
-  @override
-  List<Object> get props => [id];
+  ChatLoad({
+    required this.mensagens,
+    required this.message,
+    required this.IdSender,
+    required this.author,
+  });
 
   @override
-  String toString() => 'ChatLoad { id: $id }';
+  List<Object> get props => [IdSender];
+
+  @override
+  String toString() => 'ChatLoad { id: $IdSender}';
 }
 
 class ChatConnect extends ChatEvent {
-  final String room;
+  List<dynamic> mensagens;
 
-  ChatConnect({required this.room});
+  Function(void Function()) setState;
+
+  ChatConnect({
+    required this.mensagens,
+    required this.setState,
+  });
 
   @override
-  List<Object> get props => [room];
+  List<Object> get props => [
+        mensagens,
+        setState,
+      ];
 
   @override
-  String toString() => 'ChatConnect { room: $room }';
+  String toString() => 'ChatConnect { mensagens: $mensagens }';
+}
+
+class ChatMenssagemAddEvent extends ChatEvent {
+  List<dynamic> mensagens;
+  String message;
+  String IdSender;
+  String author;
+
+  Function(void Function()) setState;
+
+  ChatMenssagemAddEvent({
+    required this.mensagens,
+    required this.setState,
+    required this.message,
+    required this.IdSender,
+    required this.author,
+  });
+
+  @override
+  List<Object> get props => [
+        mensagens,
+        setState,
+      ];
+
+  @override
+  String toString() => 'ChatMenssagemAdd { mensagens: $mensagens }';
 }
 
 class ChatRefresh extends ChatEvent {

@@ -18,7 +18,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       emit(ChatLoading());
       try {
         await chatService().connect(
-          room: event.room,
+          event.mensagens,
+          event.setState,
         );
         emit(ChatConnected());
       } catch (e) {
@@ -33,7 +34,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       try {
         final chatAll;
         await chatService().sendMessage(
-            chatParams: Chat(author: "12", room: "12", content: "12"));
+            chatParams: Chat(
+                author: event.author,
+                room: event.IdSender,
+                content: event.message));
 
         // chatService().broadCastNotification(
         //   onReceive: (data) {
@@ -53,5 +57,25 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         emit(ChatError());
       }
     });
+
+    on<ChatMenssagemAddEvent>(
+      (event, emit) async {
+        try {
+          print('ChatMenssagemAddEvent');
+          final chatAll;
+          await chatService().sendMessage(
+              chatParams: Chat(
+                  author: event.author,
+                  room: event.IdSender,
+                  content: event.message));
+          print("event.mensagens");
+          print(event.mensagens);
+
+          emit(ChatMenssagemAdd(mensagens: event.mensagens));
+        } catch (e) {
+          print(e);
+        }
+      },
+    );
   }
 }

@@ -10,39 +10,24 @@ class chatService {
     return _singleton;
   }
 
-  Future connect({
-    required String room,
-  }) async {
-    chatRepositories.instance.connect(
-      room,
+  Future connect(
+      List<dynamic> mensagens, void Function(void Function()) setState) async {
+    chatRepositories.instance.channelconnect(
+      mensagens,
+      setState,
     );
   }
 
   Future sendMessage({
     required Chat chatParams,
   }) async {
-    chatRepositories.instance.sendMessage(
-      chatParams,
-    );
+    chatRepositories.instance.sendMessage("oi");
   }
 
-  Future broadCastNotification({
-    required void Function(dynamic) onReceive,
+  Future sendMessageS({
+    required List<dynamic> mensagens,
+    required void Function(void Function()) setState,
   }) async {
-    chatRepositories.instance.broadCastNotification(
-      onReceive: onReceive,
-    );
-  }
-
-  Future disconnect() async {
-    chatRepositories.instance.disconnect();
-  }
-
-  Stream<dynamic> getStream() {
-    return chatRepositories.instance.getStream();
-  }
-
-  Future close() async {
-    chatRepositories.instance.disconnect();
+    chatRepositories.instance.sendMessageS(mensagens, setState);
   }
 }

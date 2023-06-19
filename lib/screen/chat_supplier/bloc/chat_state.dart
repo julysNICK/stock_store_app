@@ -2,9 +2,9 @@ part of 'chat_bloc.dart';
 
 @immutable
 abstract class ChatState {
-  Chat? chat;
+  List<dynamic>? mensagens = [];
 
-  ChatState({this.chat});
+  ChatState({this.mensagens});
 }
 
 class ChatInitial extends ChatState {
@@ -23,10 +23,18 @@ class ChatConnected extends ChatState {
 }
 
 class ChatLoaded extends ChatState {
-  ChatLoaded({required Chat chat}) : super(chat: chat);
+  ChatLoaded({required List<dynamic> mensagens}) : super(mensagens: mensagens);
 
   @override
   String toString() => 'ChatLoaded';
+}
+
+class ChatMenssagemAdd extends ChatState {
+  ChatMenssagemAdd({required List<dynamic> mensagens})
+      : super(mensagens: mensagens);
+
+  @override
+  String toString() => 'ChatMenssagemAdd';
 }
 
 class ChatError extends ChatState {
