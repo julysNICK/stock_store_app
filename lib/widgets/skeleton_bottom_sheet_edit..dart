@@ -7,8 +7,12 @@ import 'cutom_buy_detail_screen.dart';
 class SkeletonBottomSheetEdit extends StatefulWidget {
   String title;
   Color colorButton;
+  String price;
   SkeletonBottomSheetEdit(
-      {super.key, required this.title, required this.colorButton});
+      {super.key,
+      required this.title,
+      required this.colorButton,
+      required this.price});
 
   @override
   State<SkeletonBottomSheetEdit> createState() =>
@@ -16,8 +20,11 @@ class SkeletonBottomSheetEdit extends StatefulWidget {
 }
 
 class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
+  String dropdownValue = '1';
   @override
   Widget build(BuildContext context) {
+    print("tela");
+    print(dropdownValue);
     return DraggableScrollableSheet(
       initialChildSize: 1,
       builder: (ctx, scrollCOntroller) {
@@ -73,23 +80,30 @@ class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Quantidade:",
                             style: TextStyle(
                               fontSize: AppFontSize.fontSizeSubTitle,
                               fontWeight: AppFontWeight.fontWeightBold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          DropdownQuantity(),
+                          DropdownQuantity(
+                            dropdownValue: dropdownValue,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownValue = newValue!;
+                              });
+                            },
+                          ),
                         ],
                       ),
-                      const Text(
-                        "R\$ 10,00",
-                        style: TextStyle(
+                      Text(
+                        "R\$ ${widget.price * int.parse(dropdownValue)},00",
+                        style: const TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
                           fontWeight: AppFontWeight.fontWeightBold,
                         ),
@@ -135,8 +149,8 @@ class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Total:",
                         style: TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
@@ -144,8 +158,8 @@ class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
                         ),
                       ),
                       Text(
-                        "R\$ 10,00",
-                        style: TextStyle(
+                        "R\$ ${widget.price * int.parse(dropdownValue)},00",
+                        style: const TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
                           fontWeight: AppFontWeight.fontWeightBold,
                         ),

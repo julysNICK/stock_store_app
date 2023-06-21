@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:meta/meta.dart';
+import 'package:stock_store/models/store.dart';
 
 import '../../../models/chat.dart';
 import '../../../service/chat_service.dart';
@@ -9,6 +13,7 @@ part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   ChatBloc() : super(ChatInitial()) {
+    const storage = FlutterSecureStorage();
     on<ChatEvent>((event, emit) {
       // TODO: implement event handler
     });
@@ -17,10 +22,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       print('ChatConnect');
       emit(ChatLoading());
       try {
-        await chatService().connect(
-          event.mensagens,
-          event.setState,
-        );
+        await chatService()
+            .connect(event.mensagens, event.setState, event.idRoom);
         emit(ChatConnected());
       } catch (e) {
         print(e);
@@ -33,6 +36,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       emit(ChatLoading());
       try {
         final chatAll;
+        Map<String, String> allValues = await storage.readAll();
+
         await chatService().sendMessage(
             chatParams: Chat(
                 author: event.author,
@@ -61,15 +66,20 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<ChatMenssagemAddEvent>(
       (event, emit) async {
         try {
-          print('ChatMenssagemAddEvent');
           final chatAll;
-          await chatService().sendMessage(
+          Map<String, String> allValues = await storage.readAll();
+
+          final decodeJsonStore = jsonDecode(allValues['token']!);
+
+          final loginJson = Login_store.fromJson(decodeJsonStore);
+
+          await chatService().sendMessageS(
+              mensagens: event.mensagens,
               chatParams: Chat(
-                  author: event.author,
-                  room: event.IdSender,
-                  content: event.message));
-          print("event.mensagens");
-          print(event.mensagens);
+                  author: loginJson.store.name,
+                  room: loginJson.store.id.toString(),
+                  content: event.message),
+              setState: event.setState);
 
           emit(ChatMenssagemAdd(mensagens: event.mensagens));
         } catch (e) {

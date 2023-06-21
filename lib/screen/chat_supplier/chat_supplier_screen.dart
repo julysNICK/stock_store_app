@@ -5,7 +5,8 @@ import '../../models/chat.dart';
 import 'bloc/chat_bloc.dart';
 
 class chat_supplier extends StatefulWidget {
-  const chat_supplier({super.key});
+  String id = '';
+  chat_supplier({super.key, this.id = ''});
 
   @override
   State<chat_supplier> createState() => _chat_supplierState();
@@ -22,6 +23,7 @@ class _chat_supplierState extends State<chat_supplier> {
     BlocProvider.of<ChatBloc>(context).add(ChatConnect(
       mensagens: mensagens,
       setState: setState,
+      idRoom: widget.id,
     ));
 
     super.initState();
@@ -39,22 +41,23 @@ class _chat_supplierState extends State<chat_supplier> {
             child: BlocBuilder<ChatBloc, ChatState>(
               builder: (context, state) {
                 return ListView.builder(
-                  itemCount: 10,
+                  itemCount: mensagens.length,
                   itemBuilder: ((context, index) {
-                    bool isMe = index % 2 == 0;
-                    print(mensagens);
                     return Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Align(
-                        alignment:
-                            isMe ? Alignment.centerRight : Alignment.centerLeft,
+                        alignment: mensagens[index]["isMe"] == true
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: isMe ? Colors.blue : Colors.grey[300],
+                            color: mensagens[index]["isMe"] == true
+                                ? Colors.blue
+                                : Colors.grey[300],
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           padding: const EdgeInsets.all(16.0),
-                          child: Text('Chat $index'),
+                          child: Text(mensagens[index]["content"]),
                         ),
                       ),
                     );

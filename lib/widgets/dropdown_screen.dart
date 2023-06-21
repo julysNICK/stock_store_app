@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class DropdownQuantity extends StatefulWidget {
-  const DropdownQuantity({super.key});
+  String dropdownValue = '1';
+  void Function(String?)? onChanged;
+  DropdownQuantity({
+    super.key,
+    required this.dropdownValue,
+    required this.onChanged,
+  });
 
   @override
   State<DropdownQuantity> createState() => _DropdownQuantityState();
@@ -53,11 +59,7 @@ class _DropdownQuantityState extends State<DropdownQuantity> {
           child: Text('10'),
         ),
       ],
-      onChanged: (String? value) {
-        setState(() {
-          // dropdownValue = value!;
-        });
-      },
+      onChanged: widget.onChanged,
       icon: const Icon(Icons.arrow_drop_down),
     );
   }

@@ -31,12 +31,14 @@ class ChatLoad extends ChatEvent {
 
 class ChatConnect extends ChatEvent {
   List<dynamic> mensagens;
+  String idRoom;
 
   Function(void Function()) setState;
 
   ChatConnect({
     required this.mensagens,
     required this.setState,
+    required this.idRoom,
   });
 
   @override

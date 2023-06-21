@@ -334,6 +334,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) => SkeletonBottomSheetEdit(
+                          price: state.product!.price.toString(),
                           title: "Editar Produto no estoque",
                           colorButton: Colors.orange[200]!,
                         ),
@@ -368,8 +369,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) => SkeletonBottomSheet(
+                          price: widget.product.price,
                           title: "Comprar Produto no estoque",
                           colorButton: Colors.green[200]!,
+                          id: widget.product.id.toString(),
                         ),
                       );
                     },

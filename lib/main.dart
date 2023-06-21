@@ -40,7 +40,7 @@ void main() async {
         ),
         BlocProvider<ChatBloc>(
           create: (context) => ChatBloc(),
-          child: const chat_supplier(),
+          child: chat_supplier(),
         ),
       ],
       child: const MyApp(),
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home: const login_screen(),
       routes: {
         '/home': (context) => const Home(),
         '/supplier': (context) => const moreSupplierScreen(),

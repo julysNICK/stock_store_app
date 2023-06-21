@@ -1,20 +1,48 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:stock_store/constants/constants.dart';
 import 'package:stock_store/widgets/dropdown_screen.dart';
-
 import 'cutom_buy_detail_screen.dart';
 
 class SkeletonBottomSheet extends StatefulWidget {
   String title;
   Color colorButton;
-  SkeletonBottomSheet(
-      {super.key, required this.title, required this.colorButton});
+  String id;
+  String price;
+  SkeletonBottomSheet({
+    super.key,
+    required this.title,
+    required this.colorButton,
+    required this.id,
+    required this.price,
+  });
 
   @override
   State<SkeletonBottomSheet> createState() => _SkeletonBottomSheetState();
 }
 
 class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
+  String dropdownValue = '1';
+  Future<void> buyProduct() async {
+    try {
+      var baseUrl = 'http://192.168.0.69:8080';
+
+      final response = await http.patch(
+        Uri.parse('$baseUrl/buy/products/2'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<dynamic, dynamic>{
+          "quantity": 10,
+          "store_id": 2,
+        }),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -42,19 +70,23 @@ class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Valor da unidade:",
                         style: TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
                           fontWeight: AppFontWeight.fontWeightBold,
                         ),
                       ),
-                      Text(
-                        "R\$ 10,00",
-                        style: TextStyle(
-                          fontSize: AppFontSize.fontSizeSubTitle,
-                          fontWeight: AppFontWeight.fontWeightBold,
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "R\$ ${widget.price},00",
+                            hintStyle: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -72,23 +104,30 @@ class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Quantidade:",
                             style: TextStyle(
                               fontSize: AppFontSize.fontSizeSubTitle,
                               fontWeight: AppFontWeight.fontWeightBold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          DropdownQuantity(),
+                          DropdownQuantity(
+                            dropdownValue: dropdownValue,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownValue = newValue!;
+                              });
+                            },
+                          ),
                         ],
                       ),
-                      const Text(
-                        "R\$ 10,00",
-                        style: TextStyle(
+                      Text(
+                        "R\$ ${int.parse(widget.price) * int.parse(dropdownValue)},00",
+                        style: const TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
                           fontWeight: AppFontWeight.fontWeightBold,
                         ),
@@ -115,7 +154,7 @@ class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
                         ),
                       ),
                       Text(
-                        "R\$ 10,00",
+                        "R\$ 15,00",
                         style: TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
                           fontWeight: AppFontWeight.fontWeightBold,
@@ -134,8 +173,8 @@ class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Total:",
                         style: TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
@@ -143,8 +182,8 @@ class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
                         ),
                       ),
                       Text(
-                        "R\$ 10,00",
-                        style: TextStyle(
+                        'R\$ ${(int.parse(widget.price) * int.parse(dropdownValue)) + 15},00',
+                        style: const TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
                           fontWeight: AppFontWeight.fontWeightBold,
                         ),
@@ -156,7 +195,9 @@ class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
                   height: 10,
                 ),
                 customBuyDetailScreen(
-                  onTap: () {},
+                  onTap: () {
+                    buyProduct();
+                  },
                   title: widget.title,
                   color: Colors.white,
                   colorButton: widget.colorButton,

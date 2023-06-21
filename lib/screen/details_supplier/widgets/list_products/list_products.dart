@@ -13,7 +13,7 @@ class list_products extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = products.isNotEmpty
-        ? MediaQuery.of(context).size.width * 0.35
+        ? MediaQuery.of(context).size.width * 0.55
         : MediaQuery.of(context).size.width * 0.1;
 
     return SizedBox(

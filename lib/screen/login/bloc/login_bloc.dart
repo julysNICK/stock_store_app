@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -22,7 +24,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final login =
             await StoreService().loginStore(event.email, event.password);
 
-        await storage.write(key: 'token', value: login.accessToken);
+        final loginString = jsonEncode(login.toJson());
+
+        await storage.write(key: 'token', value: loginString);
 
         emit(LoginLoaded(
           login: login,

@@ -25,7 +25,6 @@ class _login_screenState extends State<login_screen> {
   StoreInputsLogin storeInputsLogin = StoreInputsLogin();
 
   void onTapStoreInputsLogin() {
-    print("oioi");
     BlocProvider.of<LoginBloc>(context).add(LoginLoad(
       email: storeInputsLogin.email,
       password: storeInputsLogin.password,

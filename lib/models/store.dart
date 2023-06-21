@@ -23,6 +23,15 @@ class Login_store {
         refreshTokenExpiry: json["refresh_token_expires_at"],
         store: Store.fromJson(json["store"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "session_id": sessionId,
+        "access_token": accessToken,
+        "access_token_expires_at": AcessTokenExpiry,
+        "refresh_token": refreshToken,
+        "refresh_token_expires_at": refreshTokenExpiry,
+        "store": store.toJson(),
+      };
 }
 
 class Store {
@@ -50,6 +59,15 @@ class Store {
         contactPhone: json["contactPhone"],
         createdAt: json["createdAt"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "address": address,
+        "contactEmail": contactEmail,
+        "contactPhone": contactPhone,
+        "createdAt": createdAt,
+      };
 }
 
 class StoreInputsLogin {

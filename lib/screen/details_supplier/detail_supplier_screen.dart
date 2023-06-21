@@ -42,7 +42,9 @@ class _detailSupllierState extends State<detailSupllier> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const chat_supplier(),
+              builder: (context) => chat_supplier(
+                id: widget.id.toString(),
+              ),
             ),
           );
         },

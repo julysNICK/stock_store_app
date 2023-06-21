@@ -11,10 +11,14 @@ class chatService {
   }
 
   Future connect(
-      List<dynamic> mensagens, void Function(void Function()) setState) async {
+    List<dynamic> mensagens,
+    void Function(void Function()) setState,
+    String idRoom,
+  ) async {
     chatRepositories.instance.channelconnect(
       mensagens,
       setState,
+      idRoom,
     );
   }
 
@@ -27,7 +31,8 @@ class chatService {
   Future sendMessageS({
     required List<dynamic> mensagens,
     required void Function(void Function()) setState,
+    Chat? chatParams,
   }) async {
-    chatRepositories.instance.sendMessageS(mensagens, setState);
+    chatRepositories.instance.sendMessageS(mensagens, setState, chatParams!);
   }
 }
