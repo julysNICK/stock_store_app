@@ -334,6 +334,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) => SkeletonBottomSheetEdit(
+                          id: widget.product.id,
                           price: state.product!.price.toString(),
                           title: "Editar Produto no estoque",
                           colorButton: Colors.orange[200]!,
@@ -354,6 +355,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         builder: (context) => SkeletonBottomSheetDelete(
                           title: "Excluir Produto no estoque",
                           colorButton: Colors.redAccent[200]!,
+                          id: widget.product.id,
                         ),
                       );
                     },

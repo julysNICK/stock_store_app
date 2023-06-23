@@ -43,20 +43,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                 author: event.author,
                 room: event.IdSender,
                 content: event.message));
-
-        // chatService().broadCastNotification(
-        //   onReceive: (data) {
-        //     print("aqui");
-
-        //     print(data);
-        //     // emit(ChatLoaded(
-        //     //     chat: jsonDecode(
-        //     //   Chat.fromJson(data).toString(),
-        //     // )));
-        //   },
-        // );
-
-        // emit(ChatInitial());
       } catch (e) {
         print(e);
         emit(ChatError());

@@ -3,11 +3,18 @@ import 'package:stock_store/constants/constants.dart';
 
 import 'cutom_buy_detail_screen.dart';
 
+import 'package:http/http.dart' as http;
+
 class SkeletonBottomSheetDelete extends StatefulWidget {
   String title;
   Color colorButton;
-  SkeletonBottomSheetDelete(
-      {super.key, required this.title, required this.colorButton});
+  int id;
+  SkeletonBottomSheetDelete({
+    super.key,
+    required this.title,
+    required this.colorButton,
+    required this.id,
+  });
 
   @override
   State<SkeletonBottomSheetDelete> createState() =>
@@ -15,6 +22,21 @@ class SkeletonBottomSheetDelete extends StatefulWidget {
 }
 
 class _SkeletonBottomSheetDeleteState extends State<SkeletonBottomSheetDelete> {
+  Future<void> deleteProduct() async {
+    try {
+      var baseUrl = 'http://192.168.0.69:8080';
+
+      final response = await http.delete(
+        Uri.parse('$baseUrl/products/${widget.id}'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
@@ -47,7 +69,9 @@ class _SkeletonBottomSheetDeleteState extends State<SkeletonBottomSheetDelete> {
                     vertical: 0,
                   ),
                   child: customBuyDetailScreen(
-                    onTap: () {},
+                    onTap: () {
+                      deleteProduct();
+                    },
                     title: widget.title,
                     color: Colors.white,
                     colorButton: widget.colorButton,

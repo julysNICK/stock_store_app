@@ -19,11 +19,22 @@ class SupplierRepositories {
     return error;
   }
 
-  Future<List<Supplier>> getSuppliers() async {
+  Map<String, String> returnHeader(
+    dynamic acessToken,
+  ) {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $acessToken',
+    };
+  }
+
+  Future<List<Supplier>> getSuppliers({required String acessToken}) async {
     try {
       var baseUrl = 'http://192.168.0.69:8080';
-      final response =
-          await http.get(Uri.parse('$baseUrl/suppliers?page_id=1&limit=10'));
+      final response = await http.get(
+        Uri.parse('$baseUrl/suppliers?page_id=1&limit=10'),
+        headers: returnHeader(acessToken),
+      );
 
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
@@ -46,10 +57,16 @@ class SupplierRepositories {
     }
   }
 
-  Future<Supplier> getSupplier(String id) async {
+  Future<Supplier> getSupplier(
+    String id, {
+    required String acessToken,
+  }) async {
     try {
       var baseUrl = 'http://192.168.0.69:8080';
-      final response = await http.get(Uri.parse('$baseUrl/suppliers/$id'));
+      final response = await http.get(
+        Uri.parse('$baseUrl/suppliers/$id'),
+        headers: returnHeader(acessToken),
+      );
 
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);

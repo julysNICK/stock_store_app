@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -13,9 +15,16 @@ class SupplierBloc extends Bloc<SupplierEvent, SupplierState> {
 
     on<SupplierGetAllSuppliers>((event, emit) async {
       print('SupplierGetAllSuppliers');
+      final chatAll;
+      Map<String, String> allValues = await storage.readAll();
+
+      final decodeJsonStore = jsonDecode(allValues['token']!);
+      print(decodeJsonStore);
       emit(SupplierLoading());
       try {
-        final supplierAll = await SupplierService().getSuppliers();
+        final supplierAll = await SupplierService().getSuppliers(
+          acessToken: decodeJsonStore['access_token'],
+        );
 
         emit(SupplierLoaded(
           suppliers: supplierAll,
@@ -43,4 +52,6 @@ class SupplierBloc extends Bloc<SupplierEvent, SupplierState> {
     //   }
     // });
   }
+
+  get storage => null;
 }

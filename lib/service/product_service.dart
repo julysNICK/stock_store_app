@@ -10,10 +10,14 @@ class ProductService {
     return _singleton;
   }
 
-  Future<List<Product>> getProducts({String? category}) async {
+  Future<List<Product>> getProducts({
+    String? category,
+    dynamic acessToken,
+  }) async {
     try {
       final products = await ProductRepositories().getProducts(
         category: category,
+        acessToken: acessToken,
       );
       return products;
     } catch (e) {

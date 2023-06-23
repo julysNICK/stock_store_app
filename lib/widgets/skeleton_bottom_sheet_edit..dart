@@ -1,18 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:stock_store/constants/constants.dart';
 import 'package:stock_store/widgets/dropdown_screen.dart';
-
+import 'package:http/http.dart' as http;
 import 'cutom_buy_detail_screen.dart';
 
 class SkeletonBottomSheetEdit extends StatefulWidget {
   String title;
   Color colorButton;
   String price;
-  SkeletonBottomSheetEdit(
-      {super.key,
-      required this.title,
-      required this.colorButton,
-      required this.price});
+  int id;
+  SkeletonBottomSheetEdit({
+    super.key,
+    required this.title,
+    required this.colorButton,
+    required this.price,
+    required this.id,
+  });
 
   @override
   State<SkeletonBottomSheetEdit> createState() =>
@@ -21,6 +26,24 @@ class SkeletonBottomSheetEdit extends StatefulWidget {
 
 class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
   String dropdownValue = '1';
+  Future<void> editProduct() async {
+    try {
+      var baseUrl = 'http://192.168.0.69:8080';
+
+      final response = await http.patch(
+        Uri.parse('$baseUrl/products/${widget.id}'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<dynamic, dynamic>{
+          "quantity": 10,
+        }),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     print("tela");
@@ -50,8 +73,8 @@ class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Valor da unidade:",
                         style: TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
@@ -59,8 +82,8 @@ class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
                         ),
                       ),
                       Text(
-                        "R\$ 10,00",
-                        style: TextStyle(
+                        "R\$ ${widget.price},00",
+                        style: const TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
                           fontWeight: AppFontWeight.fontWeightBold,
                         ),
@@ -102,7 +125,7 @@ class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
                         ],
                       ),
                       Text(
-                        "R\$ ${widget.price * int.parse(dropdownValue)},00",
+                        "R\$ ${int.parse(widget.price) * int.parse(dropdownValue)},00",
                         style: const TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
                           fontWeight: AppFontWeight.fontWeightBold,
@@ -158,7 +181,7 @@ class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
                         ),
                       ),
                       Text(
-                        "R\$ ${widget.price * int.parse(dropdownValue)},00",
+                        "R\$ ${int.parse(widget.price) * int.parse(dropdownValue) + 15},00",
                         style: const TextStyle(
                           fontSize: AppFontSize.fontSizeSubTitle,
                           fontWeight: AppFontWeight.fontWeightBold,
@@ -171,7 +194,9 @@ class _SkeletonBottomSheetEditState extends State<SkeletonBottomSheetEdit> {
                   height: 10,
                 ),
                 customBuyDetailScreen(
-                  onTap: () {},
+                  onTap: () {
+                    editProduct();
+                  },
                   title: widget.title,
                   color: Colors.white,
                   colorButton: widget.colorButton,

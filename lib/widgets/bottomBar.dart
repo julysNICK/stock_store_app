@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_store/screen/home/home_screen.dart';
+import 'package:stock_store/screen/profile/profile_screen.dart';
 
 import '../screen/moreSupplier/more_supplier_screen.dart';
 
@@ -53,10 +54,20 @@ class bottomBar extends StatelessWidget {
           ),
           label: 'Suppliers',
         ),
-        const BottomNavigationBarItem(
-          icon: Icon(
-            Icons.person,
-            color: Colors.grey,
+        BottomNavigationBarItem(
+          icon: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              );
+            },
+            child: const Icon(
+              Icons.person,
+              color: Colors.grey,
+            ),
           ),
           label: 'Profile',
         ),

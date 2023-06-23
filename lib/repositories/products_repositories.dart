@@ -15,6 +15,15 @@ class ProductRepositories {
     return error;
   }
 
+  Map<String, String> returnHeader(
+    dynamic acessToken,
+  ) {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $acessToken',
+    };
+  }
+
   Future<Product> getProduct(String id) async {
     try {
       var baseUrl = 'http://192.168.0.69:8080';
@@ -32,14 +41,20 @@ class ProductRepositories {
     }
   }
 
-  Future<List<Product>> getProducts({String? category}) async {
+  Future<List<Product>> getProducts({
+    String? category,
+    dynamic acessToken,
+  }) async {
     try {
       var baseUrl = 'http://192.168.0.69:8080';
       print(
           '$baseUrl/products?page_id=1&limit=10&category=${category?.toLowerCase()}');
 
-      final response = await http.get(Uri.parse(
-          '$baseUrl/products?page_id=1&limit=10&category=${category?.toLowerCase()}'));
+      final response = await http.get(
+        Uri.parse(
+            '$baseUrl/products?page_id=1&limit=10&category=${category?.toLowerCase()}'),
+        headers: returnHeader(acessToken),
+      );
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
 
