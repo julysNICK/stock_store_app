@@ -21,7 +21,7 @@ class DetailSuppBloc extends Bloc<DetailSupplierEvent, DetailSupplierState> {
       Map<String, String> allValues = await storage.readAll();
 
       final decodeJsonStore = jsonDecode(allValues['token']!);
-      print(decodeJsonStore);
+
       emit(DetailSupplierLoading());
       try {
         final supplier = await SupplierService().getSupplier(

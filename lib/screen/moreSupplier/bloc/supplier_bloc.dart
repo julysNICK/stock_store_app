@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:meta/meta.dart';
 
 import '../../../models/supplier.dart';
@@ -11,6 +12,7 @@ part 'supplier_state.dart';
 
 class SupplierBloc extends Bloc<SupplierEvent, SupplierState> {
   SupplierBloc() : super(SupplierInitial()) {
+    const storage = FlutterSecureStorage();
     // TODO: implement event handler
 
     on<SupplierGetAllSuppliers>((event, emit) async {
@@ -19,7 +21,7 @@ class SupplierBloc extends Bloc<SupplierEvent, SupplierState> {
       Map<String, String> allValues = await storage.readAll();
 
       final decodeJsonStore = jsonDecode(allValues['token']!);
-      print(decodeJsonStore);
+
       emit(SupplierLoading());
       try {
         final supplierAll = await SupplierService().getSuppliers(
@@ -52,6 +54,4 @@ class SupplierBloc extends Bloc<SupplierEvent, SupplierState> {
     //   }
     // });
   }
-
-  get storage => null;
 }

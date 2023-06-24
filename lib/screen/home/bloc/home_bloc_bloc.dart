@@ -25,7 +25,7 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         Map<String, String> allValues = await storage.readAll();
 
         final decodeJsonStore = jsonDecode(allValues['token']!);
-        print(decodeJsonStore);
+
         final productAll = await ProductService().getProducts(
           category: event.category,
           acessToken: decodeJsonStore['access_token'],
