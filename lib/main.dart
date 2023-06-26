@@ -12,6 +12,7 @@ import 'package:stock_store/screen/moreSupplier/bloc/supplier_bloc.dart';
 import 'package:stock_store/screen/moreSupplier/more_supplier_screen.dart';
 import 'package:stock_store/screen/register/bloc/register_bloc.dart';
 import 'package:stock_store/screen/register/register_screen.dart';
+import 'package:stock_store/screen/swapScreenLoginHome/swapScreenLoginHome.dart';
 
 void main() async {
   try {
@@ -65,7 +66,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const login_screen(),
+      home: const SwapScreenLoginHome(),
       routes: {
         '/home': (context) => const Home(),
         '/supplier': (context) => const moreSupplierScreen(),

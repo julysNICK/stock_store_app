@@ -35,6 +35,8 @@ class _detailSupllierState extends State<detailSupllier> {
 
   @override
   Widget build(BuildContext context) {
+    double weigthContactsLinksResponsive =
+        MediaQuery.of(context).size.width / 2;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
@@ -115,119 +117,122 @@ class _detailSupllierState extends State<detailSupllier> {
                   style: TextStyle(fontSize: 16, color: Colors.blue),
                 ),
                 const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      borderRadius: BorderRadius.circular(12),
-                      child: Container(
-                        width: 120,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          gradient: const LinearGradient(
-                            colors: [
-                              Colors.black,
-                              Colors.grey,
+                LayoutBuilder(builder:
+                    (BuildContext context, BoxConstraints constraints) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        borderRadius: BorderRadius.circular(12),
+                        child: Container(
+                          width: constraints.maxWidth / 2 - 55,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            gradient: const LinearGradient(
+                              colors: [
+                                Colors.black,
+                                Colors.grey,
+                              ],
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "Email",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: constraints.maxWidth / 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const FaIcon(
+                                FontAwesomeIcons.envelope,
+                                color: Colors.white,
+                              ),
                             ],
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            Text(
-                              "Email",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            FaIcon(
-                              FontAwesomeIcons.envelope,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      borderRadius: BorderRadius.circular(12),
-                      child: Container(
-                        width: 120,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          gradient: const LinearGradient(
-                            colors: [
-                              Colors.green,
-                              Colors.greenAccent,
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        borderRadius: BorderRadius.circular(12),
+                        child: Container(
+                          width: constraints.maxWidth / 2 - 55,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            gradient: const LinearGradient(
+                              colors: [
+                                Colors.green,
+                                Colors.greenAccent,
+                              ],
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "Whatsapp",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: constraints.maxWidth / 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const FaIcon(
+                                FontAwesomeIcons.whatsapp,
+                                color: Colors.white,
+                              ),
                             ],
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            Text(
-                              "Whatsapp",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            FaIcon(
-                              FontAwesomeIcons.whatsapp,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      borderRadius: BorderRadius.circular(12),
-                      child: Container(
-                        width: 120,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          gradient: const LinearGradient(
-                            colors: [
-                              Colors.purple,
-                              Colors.purpleAccent,
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        borderRadius: BorderRadius.circular(12),
+                        child: Container(
+                          width: constraints.maxWidth / 2 - 55,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            gradient: const LinearGradient(
+                              colors: [
+                                Colors.purple,
+                                Colors.purpleAccent,
+                              ],
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "Instagram",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: constraints.maxWidth / 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const FaIcon(
+                                FontAwesomeIcons.instagram,
+                                color: Colors.white,
+                              ),
                             ],
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            Text(
-                              "Instagram",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            FaIcon(
-                              FontAwesomeIcons.instagram,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  );
+                }),
                 const SizedBox(
                   height: 20,
                 ),

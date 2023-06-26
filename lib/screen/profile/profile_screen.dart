@@ -1,9 +1,43 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../../models/store.dart';
 import '../../widgets/bottomBar.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  FlutterSecureStorage storage = const FlutterSecureStorage();
+  Login_store? loginJson;
+  @override
+  void initState() {
+    print("initState");
+    // TODO: implement initState
+    super.initState();
+    getCredentials();
+  }
+
+  Future<void> getCredentials() async {
+    try {
+      Map<String, String> allValues = await storage.readAll();
+
+      final decodeJsonStore = jsonDecode(allValues['token']!);
+      print(decodeJsonStore);
+
+      setState(() {
+        loginJson = Login_store.fromJson(decodeJsonStore);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,22 +96,22 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
 
-                const Center(
+                Center(
                   child: Text(
-                    'Name',
-                    style: TextStyle(
+                    loginJson!.store.name,
+                    style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
-                const Center(
+                Center(
                   child: Text(
-                    'Email',
-                    style: TextStyle(
+                    loginJson!.store.contactEmail,
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey,
@@ -98,10 +132,19 @@ class ProfileScreen extends StatelessWidget {
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    iconProfile(),
-                    iconProfile(),
-                    iconProfile(),
+                  children: [
+                    iconProfile(
+                      title: "Endereço",
+                      subtitle: loginJson!.store.address,
+                    ),
+                    iconProfile(
+                      title: "Telefone",
+                      subtitle: loginJson!.store.contactPhone,
+                    ),
+                    iconProfile(
+                      title: "Crianção da Conta",
+                      subtitle: loginJson!.store.createdAt,
+                    ),
                   ],
                 )
               ],
@@ -115,8 +158,12 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class iconProfile extends StatelessWidget {
-  const iconProfile({
+  String? title;
+  String? subtitle;
+  iconProfile({
     super.key,
+    this.title,
+    this.subtitle,
   });
 
   @override
@@ -128,19 +175,22 @@ class iconProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                children: const [
-                  Icon(
+                children: [
+                  const Icon(
                     Icons.streetview,
                     color: Colors.grey,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    'Address',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.21,
+                    child: Text(
+                      title ?? "Carregando...",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      softWrap: true,
                     ),
                   ),
                 ],
@@ -151,15 +201,15 @@ class iconProfile extends StatelessWidget {
                     left: 20,
                     top: 5,
                   ),
-                  child: const Center(
+                  child: Center(
                       child: Text(
-                    "lorem lowlkjeeiowfjweiojfeowijifrem",
+                    subtitle ?? "Carregando...",
                     softWrap: true,
                   ))),
             ],
           ),
-          const SizedBox(
-            width: 10,
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.01,
           ),
           Container(
             height: 90,

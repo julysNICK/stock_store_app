@@ -11,6 +11,11 @@ class card_product_item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double fontSizeProductTitleResponsive = MediaQuery.of(context).size.width *
+        (MediaQuery.of(context).size.width <= 450 ? 0.035 : 0.02);
+
+    double fontSizeProductPriceResponsive =
+        MediaQuery.of(context).size.width * 0.035;
     return GestureDetector(
       onTap: () {
         print('Card ');
@@ -37,17 +42,17 @@ class card_product_item extends StatelessWidget {
             ),
             Text(
               product.name,
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 16,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: fontSizeProductTitleResponsive,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               'R\$ ${product.price}',
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.grey,
-                fontSize: 15,
+                fontSize: fontSizeProductPriceResponsive,
               ),
             ),
           ],
