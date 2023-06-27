@@ -3,9 +3,11 @@ part of 'home_bloc_bloc.dart';
 @immutable
 abstract class HomeBlocState {
   List<Product> products = [];
+  String? message;
 
   HomeBlocState({
     this.products = const [],
+    this.message,
   });
 
   @override
@@ -43,7 +45,7 @@ class HomeBlocLoaded extends HomeBlocState {
 }
 
 class HomeBlocError extends HomeBlocState {
-  HomeBlocError() : super();
+  HomeBlocError({required String message}) : super(message: message);
 
   @override
   List<Object> get props => [];

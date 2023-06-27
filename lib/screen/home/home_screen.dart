@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_store/screen/home/widgets/Tab_bar_categories/Tab_bar_categories.dart';
 import 'package:stock_store/screen/home/widgets/app_bar/app_bar.dart';
 import 'package:stock_store/screen/home/widgets/list_view_product/list_view_product.dart';
+import 'package:stock_store/screen/profile/profile_screen.dart';
 
 import '../../constants/constants.dart';
 import '../../widgets/bottomBar.dart';
+import '../moreSupplier/more_supplier_screen.dart';
 import 'bloc/home_bloc_bloc.dart';
 
 class Home extends StatefulWidget {
@@ -18,6 +20,16 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TextEditingController searchController = TextEditingController();
   TabController? tabController;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  late HomeBlocBloc _providerHomeBloc;
+  bool _disposed = false;
+
+  final List _screens = [
+    const Home(),
+    const moreSupplierScreen(),
+    const ProfileScreen(),
+  ];
 
   final List<String> _tags = [
     "All",
@@ -33,8 +45,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _providerHomeBloc = BlocProvider.of<HomeBlocBloc>(context);
 
-    BlocProvider.of<HomeBlocBloc>(context).add(HomeBlocGetAllProducts(
+    if (_disposed) {
+      return;
+    }
+
+    _providerHomeBloc.add(HomeBlocGetAllProducts(
       category: _tags[0],
     ));
 
@@ -47,9 +64,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 
   void whenTabChange() {
-    BlocProvider.of<HomeBlocBloc>(context).add(HomeBlocGetAllProducts(
+    _providerHomeBloc.add(HomeBlocGetAllProducts(
       category: _tags[tabController!.index],
     ));
+  }
+
+  @override
+  void didChangeDependencies() {
+    _providerHomeBloc = BlocProvider.of<HomeBlocBloc>(context);
+
+    super.didChangeDependencies();
   }
 
   @override
@@ -60,7 +84,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       tabController!.dispose();
     }
 
-    BlocProvider.of<HomeBlocBloc>(context).close();
+    _providerHomeBloc.close();
+
+    _disposed = true;
+
     super.dispose();
   }
 
@@ -104,126 +131,141 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: _tags.length,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(
-              16.0,
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      'Stock Market',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: AppFontSize.fontSizeTitle,
-                        fontWeight: AppFontWeight.fontWeightBold,
-                        fontFamily: 'Poppins',
+      child: BlocListener<HomeBlocBloc, HomeBlocState>(
+        listener: (context, state) {
+          // TODO: implement listener
+
+          if (state is HomeBlocError) {
+            print("erro");
+
+            if (state.message!.contains("Unauthorized")) {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/login', (route) => false);
+            }
+          }
+        },
+        child: Scaffold(
+          key: _scaffoldKey,
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(
+                16.0,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Stock Market',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: AppFontSize.fontSizeTitle,
+                          fontWeight: AppFontWeight.fontWeightBold,
+                          fontFamily: 'Poppins',
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Text(
-                  'Welcome to the Stock Market App',
-                  style: TextStyle(
-                    color: Colors.grey[400],
-                    fontSize: AppFontSize.fontSizeBody,
-                    fontWeight: AppFontWeight.fontWeightNormal,
-                    fontFamily: 'Poppins',
+                    ],
                   ),
-                ),
-                const SizedBox(
-                  height: 16.0,
-                ),
-                const BarApp(),
-                const SizedBox(
-                  height: 25,
-                ),
-                Tab_bar_categories(tabController: tabController, tags: _tags),
-                const SizedBox(
-                  height: 25,
-                ),
-                Flexible(
-                  child: TabBarView(controller: tabController, children: [
-                    CustomScrollView(
-                      slivers: [
-                        SliverList(
-                          delegate: SliverChildListDelegate(
-                            [
-                              BlocBuilder<HomeBlocBloc, HomeBlocState>(
-                                builder: (context, state) {
-                                  return buildProductListView(
-                                    productDataTest: state.products,
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                  Text(
+                    'Welcome to the Stock Market App',
+                    style: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: AppFontSize.fontSizeBody,
+                      fontWeight: AppFontWeight.fontWeightNormal,
+                      fontFamily: 'Poppins',
                     ),
-                    CustomScrollView(
-                      slivers: [
-                        SliverList(
-                          delegate: SliverChildListDelegate(
-                            [
-                              BlocBuilder<HomeBlocBloc, HomeBlocState>(
-                                builder: (context, state) {
-                                  return buildProductListView(
-                                    productDataTest: state.products,
-                                  );
-                                },
-                              ),
-                            ],
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  const BarApp(),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Tab_bar_categories(tabController: tabController, tags: _tags),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Flexible(
+                    child: TabBarView(controller: tabController, children: [
+                      CustomScrollView(
+                        slivers: [
+                          SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                BlocBuilder<HomeBlocBloc, HomeBlocState>(
+                                  builder: (context, state) {
+                                    return buildProductListView(
+                                      productDataTest: state.products,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    CustomScrollView(
-                      slivers: [
-                        SliverList(
-                          delegate: SliverChildListDelegate(
-                            [
-                              BlocBuilder<HomeBlocBloc, HomeBlocState>(
-                                builder: (context, state) {
-                                  return buildProductListView(
-                                    productDataTest: state.products,
-                                  );
-                                },
-                              ),
-                            ],
+                        ],
+                      ),
+                      CustomScrollView(
+                        slivers: [
+                          SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                BlocBuilder<HomeBlocBloc, HomeBlocState>(
+                                  builder: (context, state) {
+                                    return buildProductListView(
+                                      productDataTest: state.products,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    CustomScrollView(
-                      slivers: [
-                        SliverList(
-                          delegate: SliverChildListDelegate(
-                            [
-                              BlocBuilder<HomeBlocBloc, HomeBlocState>(
-                                builder: (context, state) {
-                                  return buildProductListView(
-                                    productDataTest: state.products,
-                                  );
-                                },
-                              ),
-                            ],
+                        ],
+                      ),
+                      CustomScrollView(
+                        slivers: [
+                          SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                BlocBuilder<HomeBlocBloc, HomeBlocState>(
+                                  builder: (context, state) {
+                                    return buildProductListView(
+                                      productDataTest: state.products,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ]),
-                )
-              ],
+                        ],
+                      ),
+                      CustomScrollView(
+                        slivers: [
+                          SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                BlocBuilder<HomeBlocBloc, HomeBlocState>(
+                                  builder: (context, state) {
+                                    return buildProductListView(
+                                      productDataTest: state.products,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ]),
+                  )
+                ],
+              ),
             ),
           ),
+          bottomNavigationBar: const bottomBar(),
         ),
-        bottomNavigationBar: const bottomBar(),
       ),
     );
   }

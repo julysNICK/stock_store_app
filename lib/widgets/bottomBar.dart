@@ -40,6 +40,7 @@ class bottomBar extends StatelessWidget {
         BottomNavigationBarItem(
           icon: GestureDetector(
             onTap: () {
+              print("suppliers");
               Navigator.push(
                 context,
                 MaterialPageRoute(

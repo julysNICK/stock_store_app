@@ -37,7 +37,7 @@ class ProductRepositories {
       }
     } catch (e) {
       print(e);
-      return throw Exception('Failed to load product');
+      return throw Exception(e);
     }
   }
 
@@ -68,12 +68,14 @@ class ProductRepositories {
         });
 
         return products;
+      } else if (response.statusCode == 401) {
+        return throw Exception('Unauthorized');
       } else {
         return throw Exception('Failed to load products');
       }
     } catch (e) {
       print(e);
-      return throw Exception('Failed to load products');
+      return throw Exception(e);
     }
   }
 
@@ -90,10 +92,10 @@ class ProductRepositories {
         });
         return products;
       } else {
-        return throw Exception('Failed to load products');
+        return throw Exception("Failed to load products");
       }
     } catch (e) {
-      return throw Exception('Failed to load products');
+      return throw Exception(e);
     }
   }
 
@@ -131,7 +133,7 @@ class ProductRepositories {
         return throw Exception('Failed to delete product');
       }
     } catch (e) {
-      return throw Exception('Failed to delete product');
+      return throw Exception(e);
     }
   }
 
@@ -149,10 +151,10 @@ class ProductRepositories {
         });
         return products;
       } else {
-        return throw Exception('Failed to load products');
+        return throw Exception("Failed to load products");
       }
     } catch (e) {
-      return throw Exception('Failed to load products');
+      return throw Exception(e);
     }
   }
 }

@@ -21,7 +21,7 @@ class ProductService {
       );
       return products;
     } catch (e) {
-      return throw Exception('Failed to load products');
+      return throw Exception(e);
     }
   }
 
@@ -39,7 +39,7 @@ class ProductService {
       final products = await ProductRepositories().searchProduct(query);
       return products;
     } catch (e) {
-      return throw Exception('Failed to load products');
+      return throw Exception(e);
     }
   }
 }

@@ -36,7 +36,9 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         // emit(HomeBlocInitial());
       } catch (e) {
         print(e);
-        emit(HomeBlocError());
+        emit(HomeBlocError(
+          message: e.toString(),
+        ));
       }
     });
     on<HomeBlocGetProductBySupplierId>((event, emit) async {
@@ -53,7 +55,11 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         // emit(HomeBlocInitial());
       } catch (e) {
         print(e);
-        emit(HomeBlocError());
+        emit(
+          HomeBlocError(
+            message: e.toString(),
+          ),
+        );
       }
     });
 
@@ -71,7 +77,9 @@ class HomeBlocBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         // emit(HomeBlocInitial());
       } catch (e) {
         print(e);
-        emit(HomeBlocError());
+        emit(HomeBlocError(
+          message: e.toString(),
+        ));
       }
     });
   }

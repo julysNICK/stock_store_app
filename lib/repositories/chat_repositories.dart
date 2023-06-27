@@ -54,7 +54,7 @@ class chatRepositories {
         }
       });
     } catch (e) {
-      return throw Exception('Failed to load products');
+      return throw Exception(e);
     }
   }
 
