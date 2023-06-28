@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../models/store.dart';
-import '../../widgets/bottomBar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -98,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 Center(
                   child: Text(
-                    loginJson!.store.name,
+                    loginJson?.store.name ?? "Carregando...",
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -110,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Center(
                   child: Text(
-                    loginJson!.store.contactEmail,
+                    loginJson?.store.contactEmail ?? "Carregando...",
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -135,15 +134,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     iconProfile(
                       title: "Endereço",
-                      subtitle: loginJson!.store.address,
+                      subtitle: loginJson?.store.address ?? "Carregando...",
                     ),
                     iconProfile(
                       title: "Telefone",
-                      subtitle: loginJson!.store.contactPhone,
+                      subtitle:
+                          loginJson?.store.contactPhone ?? "Carregando...",
                     ),
                     iconProfile(
                       title: "Crianção da Conta",
-                      subtitle: loginJson!.store.createdAt,
+                      subtitle: loginJson?.store.createdAt ?? "Carregando...",
                     ),
                   ],
                 )
@@ -152,7 +152,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const bottomBar(),
     );
   }
 }

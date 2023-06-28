@@ -6,7 +6,6 @@ import 'package:stock_store/screen/home/widgets/list_view_product/list_view_prod
 import 'package:stock_store/screen/profile/profile_screen.dart';
 
 import '../../constants/constants.dart';
-import '../../widgets/bottomBar.dart';
 import '../moreSupplier/more_supplier_screen.dart';
 import 'bloc/home_bloc_bloc.dart';
 
@@ -22,7 +21,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController? tabController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  late HomeBlocBloc _providerHomeBloc;
+  late final HomeBlocBloc _providerHomeBloc =
+      BlocProvider.of<HomeBlocBloc>(context);
   bool _disposed = false;
 
   final List _screens = [
@@ -44,12 +44,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-    _providerHomeBloc = BlocProvider.of<HomeBlocBloc>(context);
-
-    if (_disposed) {
+    if (_providerHomeBloc.isClosed) {
       return;
     }
+    super.initState();
 
     _providerHomeBloc.add(HomeBlocGetAllProducts(
       category: _tags[0],
@@ -69,24 +67,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     ));
   }
 
-  @override
-  void didChangeDependencies() {
-    _providerHomeBloc = BlocProvider.of<HomeBlocBloc>(context);
+  // @override
+  // void didChangeDependencies() {
+  //   _providerHomeBloc = BlocProvider.of<HomeBlocBloc>(context);
 
-    super.didChangeDependencies();
-  }
+  //   super.didChangeDependencies();
+  // }
 
   @override
   void dispose() {
     // TODO: implement dispose
 
-    if (mounted) {
-      tabController!.dispose();
+    _disposed = true;
+    if (mounted && tabController != null) {
+      tabController?.dispose();
     }
 
-    _providerHomeBloc.close();
-
-    _disposed = true;
+    // _providerHomeBloc.close();
 
     super.dispose();
   }
@@ -264,7 +261,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
             ),
           ),
-          bottomNavigationBar: const bottomBar(),
         ),
       ),
     );

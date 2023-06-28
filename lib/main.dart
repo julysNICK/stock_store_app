@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_store/screen/NavibarBottom/NavibarBottom.dart';
 import 'package:stock_store/screen/chat_supplier/bloc/chat_bloc.dart';
 import 'package:stock_store/screen/chat_supplier/chat_supplier_screen.dart';
 import 'package:stock_store/screen/details/bloc/detail_product_bloc.dart';
 import 'package:stock_store/screen/details_supplier/bloc/detail_supplier_bloc.dart';
 import 'package:stock_store/screen/home/bloc/home_bloc_bloc.dart';
-import 'package:stock_store/screen/home/home_screen.dart';
 import 'package:stock_store/screen/login/bloc/login_bloc.dart';
 import 'package:stock_store/screen/login/login_screen.dart';
 import 'package:stock_store/screen/moreSupplier/bloc/supplier_bloc.dart';
@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: const SwapScreenLoginHome(),
       routes: {
-        '/home': (context) => const Home(),
+        '/home': (context) => const NavBarBottom(),
         '/supplier': (context) => const moreSupplierScreen(),
         '/login': (context) => const login_screen(),
         '/register': (context) => const Register_screen(),

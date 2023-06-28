@@ -21,6 +21,8 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  late DetailProductBloc _detailProductBloc =
+      BlocProvider.of<DetailProductBloc>(context);
   final List<String> _sizes = [
     "45",
     "46",
@@ -35,9 +37,24 @@ class _DetailsScreenState extends State<DetailsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    if (_detailProductBloc.isClosed) {
+      return;
+    }
 
-    BlocProvider.of<DetailProductBloc>(context)
-        .add(DetailProductLoad(id: widget.product.id.toString()));
+    _detailProductBloc.add(DetailProductLoad(id: widget.product.id.toString()));
+  }
+
+  @override
+  void didChangeDependencies() {
+    _detailProductBloc = BlocProvider.of<DetailProductBloc>(context);
+
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _detailProductBloc.close();
+    super.dispose();
   }
 
   Widget _buildSizeTags(int index) {

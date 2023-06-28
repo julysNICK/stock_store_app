@@ -34,13 +34,9 @@ class chatRepositories {
         pingInterval: const Duration(seconds: 5),
       );
       channel.stream.listen((event) {
-        print("event");
-        print(event);
-        print("-----------------------");
         var jsonEvent = jsonDecode(event);
 
         if (jsonEvent["author"] != loginJson.store.name) {
-          print("aqui no author");
           setState(() {
             mensagens.add(
               {

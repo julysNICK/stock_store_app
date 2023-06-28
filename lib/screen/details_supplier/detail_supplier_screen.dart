@@ -21,16 +21,39 @@ class detailSupllier extends StatefulWidget {
 }
 
 class _detailSupllierState extends State<detailSupllier> {
+  late final DetailSuppBloc _providerDetailBloc =
+      BlocProvider.of<DetailSuppBloc>(context);
+  late HomeBlocBloc _providerHomeBloc = BlocProvider.of<HomeBlocBloc>(context);
   @override
   void initState() {
     // TODO: implement initState
+
+    if (_providerDetailBloc.isClosed || _providerHomeBloc.isClosed) {
+      return;
+    }
+
     super.initState();
-    BlocProvider.of<DetailSuppBloc>(context).add(DetailSupplierLoad(
+    _providerDetailBloc.add(DetailSupplierLoad(
       id: widget.id.toString(),
     ));
-    BlocProvider.of<HomeBlocBloc>(context).add(HomeBlocGetProductBySupplierId(
+    _providerHomeBloc.add(HomeBlocGetProductBySupplierId(
       id: widget.id.toString(),
     ));
+  }
+
+  @override
+  void didChangeDependencies() {
+    _providerHomeBloc = BlocProvider.of<HomeBlocBloc>(context);
+    // _providerDetailBloc = BlocProvider.of<DetailSuppBloc>(context);
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _providerDetailBloc.close();
+    // _providerHomeBloc.close();
+
+    super.dispose();
   }
 
   @override
@@ -55,7 +78,7 @@ class _detailSupllierState extends State<detailSupllier> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +151,7 @@ class _detailSupllierState extends State<detailSupllier> {
                         },
                         borderRadius: BorderRadius.circular(12),
                         child: Container(
-                          width: constraints.maxWidth / 2 - 55,
+                          width: constraints.maxWidth / 3 - 10,
                           height: 30,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
@@ -164,7 +187,7 @@ class _detailSupllierState extends State<detailSupllier> {
                         },
                         borderRadius: BorderRadius.circular(12),
                         child: Container(
-                          width: constraints.maxWidth / 2 - 55,
+                          width: constraints.maxWidth / 3 - 10,
                           height: 30,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
@@ -200,7 +223,7 @@ class _detailSupllierState extends State<detailSupllier> {
                         },
                         borderRadius: BorderRadius.circular(12),
                         child: Container(
-                          width: constraints.maxWidth / 2 - 55,
+                          width: constraints.maxWidth / 3 - 10,
                           height: 30,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),

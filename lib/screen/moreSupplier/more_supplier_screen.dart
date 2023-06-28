@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_store/screen/moreSupplier/widgets/item_list/item_list.dart';
 
-import '../../widgets/bottomBar.dart';
 import 'bloc/supplier_bloc.dart';
 
 class moreSupplierScreen extends StatefulWidget {
@@ -13,18 +12,24 @@ class moreSupplierScreen extends StatefulWidget {
 }
 
 class _moreSupplierScreenState extends State<moreSupplierScreen> {
+  late final SupplierBloc _providerSupplier =
+      BlocProvider.of<SupplierBloc>(context);
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<SupplierBloc>(context).add(SupplierGetAllSuppliers());
+    if (_providerSupplier.isClosed) {
+      return;
+    }
+
+    _providerSupplier.add(SupplierGetAllSuppliers());
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    BlocProvider.of<SupplierBloc>(context).close();
+    _providerSupplier.close();
   }
 
   @override
@@ -71,7 +76,6 @@ class _moreSupplierScreenState extends State<moreSupplierScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const bottomBar(),
     );
   }
 }

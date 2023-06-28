@@ -5,28 +5,22 @@ import 'package:stock_store/screen/profile/profile_screen.dart';
 import '../screen/moreSupplier/more_supplier_screen.dart';
 
 class bottomBar extends StatelessWidget {
-  const bottomBar({super.key});
+  void Function(int)? onTap;
+  int currentIndex = 0;
+  bottomBar({super.key, this.onTap, this.currentIndex = 0});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       backgroundColor: Colors.white,
+      onTap: onTap,
+      currentIndex: currentIndex,
       elevation: 0.0,
-      items: [
+      items: const [
         BottomNavigationBarItem(
-          icon: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Home(),
-                ),
-              );
-            },
-            child: const Icon(
-              Icons.home,
-              color: Colors.grey,
-            ),
+          icon: Icon(
+            Icons.home,
+            color: Colors.grey,
           ),
           label: 'Home',
         ),
@@ -38,37 +32,16 @@ class bottomBar extends StatelessWidget {
         //   label: 'Favorite',
         // ),
         BottomNavigationBarItem(
-          icon: GestureDetector(
-            onTap: () {
-              print("suppliers");
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const moreSupplierScreen(),
-                ),
-              );
-            },
-            child: const Icon(
-              Icons.store,
-              color: Colors.grey,
-            ),
+          icon: Icon(
+            Icons.store,
+            color: Colors.grey,
           ),
           label: 'Suppliers',
         ),
         BottomNavigationBarItem(
-          icon: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProfileScreen(),
-                ),
-              );
-            },
-            child: const Icon(
-              Icons.person,
-              color: Colors.grey,
-            ),
+          icon: Icon(
+            Icons.person,
+            color: Colors.grey,
           ),
           label: 'Profile',
         ),
