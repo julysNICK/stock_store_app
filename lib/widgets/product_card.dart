@@ -47,8 +47,20 @@ class _ProductCardState extends State<ProductCard> {
                     height: 120,
                     width: 140,
                     child: Hero(
-                        tag: widget.product.id,
-                        child: Image.network(widget.product.imageUrl)),
+                      tag: widget.product.id,
+                      child: Image.network(
+                        widget.product.imageUrl,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 ),
               ],

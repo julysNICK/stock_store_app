@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_store/constants/constants.dart';
+import 'package:stock_store/widgets/popup_error.dart';
+import 'package:stock_store/widgets/popup_sucess.dart';
 
 import 'cutom_buy_detail_screen.dart';
 
@@ -22,6 +24,7 @@ class SkeletonBottomSheetDelete extends StatefulWidget {
 }
 
 class _SkeletonBottomSheetDeleteState extends State<SkeletonBottomSheetDelete> {
+  BuildContext? dialogContext;
   Future<void> deleteProduct() async {
     try {
       var baseUrl = 'http://192.168.0.69:8080';
@@ -32,8 +35,19 @@ class _SkeletonBottomSheetDeleteState extends State<SkeletonBottomSheetDelete> {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+      dialogContext = context;
+      showDialog(
+        context: dialogContext!,
+        builder: (BuildContext context) =>
+            const Popup_Success(errorSuccess: "Compra realizada"),
+      );
     } catch (e) {
       print(e);
+      showDialog(
+        context: context,
+        builder: (context) =>
+            const Popup_Error(errorMessage: 'Erro ao deletar!'),
+      );
     }
   }
 

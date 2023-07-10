@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:stock_store/constants/constants.dart';
 import 'package:stock_store/widgets/dropdown_screen.dart';
+import 'package:stock_store/widgets/popup_error.dart';
+import 'package:stock_store/widgets/popup_sucess.dart';
 import 'cutom_buy_detail_screen.dart';
 
 class SkeletonBottomSheet extends StatefulWidget {
@@ -24,6 +26,7 @@ class SkeletonBottomSheet extends StatefulWidget {
 
 class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
   String dropdownValue = '1';
+  BuildContext? dialogContext;
   Future<void> buyProduct() async {
     try {
       var baseUrl = 'http://192.168.0.69:8080';
@@ -38,8 +41,18 @@ class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
           "store_id": 2,
         }),
       );
+      dialogContext = context;
+      showDialog(
+        context: dialogContext!,
+        builder: (BuildContext context) =>
+            const Popup_Success(errorSuccess: "Compra realizada"),
+      );
     } catch (e) {
       print(e);
+      showDialog(
+        context: context,
+        builder: (context) => Popup_Error(errorMessage: e.toString()),
+      );
     }
   }
 
@@ -138,14 +151,14 @@ class _SkeletonBottomSheetState extends State<SkeletonBottomSheet> {
                 const SizedBox(
                   height: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
+                const Padding(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 10,
                     vertical: 0,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         "Frete:",
                         style: TextStyle(

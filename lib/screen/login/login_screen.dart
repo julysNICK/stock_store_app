@@ -6,6 +6,7 @@ import 'package:stock_store/screen/login/widgets/create_account.dart';
 import 'package:stock_store/screen/login/widgets/forgot_password.dart';
 import 'package:stock_store/screen/login/widgets/form_login.dart';
 import 'package:stock_store/screen/login/widgets/logo.dart';
+import 'package:stock_store/widgets/popup_error.dart';
 
 import '../../models/store.dart';
 import 'bloc/login_state.dart';
@@ -48,6 +49,14 @@ class _login_screenState extends State<login_screen> {
         listener: (context, state) {
           if (state is LoginLoaded) {
             Navigator.pushNamed(context, '/home');
+          }
+
+          if (state is LoginError) {
+            showDialog(
+              context: context,
+              builder: (context) =>
+                  const Popup_Error(errorMessage: "Verifique os dados"),
+            );
           }
         },
         child: SafeArea(

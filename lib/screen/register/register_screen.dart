@@ -4,6 +4,7 @@ import 'package:stock_store/screen/register/widgets/button_register.dart';
 import 'package:stock_store/screen/register/widgets/enter_account_register.dart';
 import 'package:stock_store/screen/register/widgets/form_register.dart';
 
+import '../../widgets/popup_error.dart';
 import '../login/widgets/logo.dart';
 import 'bloc/register_bloc.dart';
 import 'bloc/register_state.dart';
@@ -36,6 +37,14 @@ class Register_screen extends StatelessWidget {
         listener: (context, state) {
           if (state is RegisterLoaded) {
             Navigator.pushNamed(context, '/login');
+          }
+
+          if (state is RegisterError) {
+            showDialog(
+              context: context,
+              builder: (context) =>
+                  const Popup_Error(errorMessage: "Verifique os dados"),
+            );
           }
         },
         child: SafeArea(

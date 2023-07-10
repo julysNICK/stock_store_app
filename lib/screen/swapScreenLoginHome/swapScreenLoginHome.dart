@@ -45,6 +45,11 @@ class _SwapScreenLoginHomeState extends State<SwapScreenLoginHome> {
       }
     } catch (e) {
       print(e);
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/login',
+        (route) => false,
+      );
     }
   }
 

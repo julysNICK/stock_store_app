@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:stock_store/widgets/popup_error.dart';
 
 import '../../models/store.dart';
 
@@ -35,6 +36,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
     } catch (e) {
       print(e);
+
+      showDialog(
+        context: context,
+        builder: (context) =>
+            const Popup_Error(errorMessage: "Erro ao carregar dados"),
+      );
     }
   }
 

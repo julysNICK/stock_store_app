@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stock_store/screen/home/home_screen.dart';
-import 'package:stock_store/screen/profile/profile_screen.dart';
-
-import '../screen/moreSupplier/more_supplier_screen.dart';
 
 class bottomBar extends StatelessWidget {
   void Function(int)? onTap;

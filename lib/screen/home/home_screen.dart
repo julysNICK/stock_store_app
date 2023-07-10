@@ -151,9 +151,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
               child: Column(
                 children: [
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'Stock Market',
                         style: TextStyle(
