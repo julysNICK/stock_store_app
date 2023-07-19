@@ -49,6 +49,8 @@
 <p>This app uses integration to connect to other services. The integration is used to connect to a payment service, a shipping service, and an inventory service.</p>
 <h2>Animation</h2>
 <p>This app uses animation to make the user interface more attractive. The animation is used to animate buttons, text fields, and other user interface elements.</p>
+<h2>Demo</h2>
+<p>This app uses HTTP calls to communicate with a server. The HTTP calls are used to retrieve data from the server and save data to the server.</p>
 <h2>Contributing</h2>
 <p>If you want to contribute to this app, you can do so by following these steps:</p>
 <ol>
